@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca_Tomar.Models
 {
-    public class Users
+    public class Utilizadores
     {
         /// <summary>
         /// Identificador dos utilizadores
@@ -28,15 +28,14 @@ namespace Biblioteca_Tomar.Models
         [StringLength(14, MinimumLength = 9, ErrorMessage = "O {0} deve ter entre {2} e {1} caracteres.")]
         [RegularExpression("(00)?([0-9]{2,3})?[1-9][0-9]{8}", ErrorMessage = "Escreva, por favor, um nº Telemóvel com 9 algarismos. Se quiser, pode acrescentar o indicativo nacional e o internacional. ")]
         [Display(Name = "Telemóvel")]
-        public string Telemovel { get; set; }    
+        public string Telemovel { get; set; }
 
         /// <summary>
         /// Email
         /// </summary>
+        [Required(ErrorMessage = "O Email de preenchimento obrigatório")]
         [StringLength(50, ErrorMessage = "O {0} não pode ter mais de {1} caracteres.")]
         [EmailAddress(ErrorMessage = "o {0} introduzido não é válido")]
-        [RegularExpression(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
-        ErrorMessage = "Por favor, insira o endereço de email correto")]
         public string Email { get; set; } 
 
     }

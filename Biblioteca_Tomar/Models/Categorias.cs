@@ -22,11 +22,14 @@ namespace Biblioteca_Tomar.Models
         /// <summary>
         /// identifica o nome da categoria
         /// </summary>
+        [Required(ErrorMessage = "A Designação é de preenchimento obrigatório")]
+        [Display(Name = "Designação")]
         public string Designacao { get; set; }
 
         /// <summary>
         /// Secção ou estante em que a categoria está colocada 
         /// </summary>
+        [Display(Name = "Secção")]
         public int Seccao { get; set; }
 
         /// <summary>

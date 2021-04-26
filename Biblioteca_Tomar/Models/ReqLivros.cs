@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca_Tomar.Models
 {
-    public class ReqUsers
+    public class ReqLivros
     {
         /// <summary>
         /// PK para a tabela do relacionamento entre Requesitos e Users
@@ -22,15 +22,15 @@ namespace Biblioteca_Tomar.Models
         /// </summary>
         [ForeignKey("Req")]
         public int ReqFK { get; set; }
-        public Requesitos Req { get; set; }
+        public Requisicoes Req { get; set; }
 
 
         /// <summary>
-        /// FK para o User
+        /// FK para o Livro
         /// </summary>
-        [ForeignKey("User")]  
-        public int UserFK { get; set; }
-        public Users User { get; set; }
+        [ForeignKey("Livro")]  
+        public int LivroFK { get; set; }
+        public Livros Livro { get; set; }
 
     }
 }

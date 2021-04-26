@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 
 namespace Biblioteca_Tomar.Models
 {
-    public class Requesitos
+    public class Requisicoes
     {
-
+        public Requisicoes()
+        {
+            // inicializar a lista de Requisições
+            ListaLivros = new HashSet<ReqLivros>();
+        }
         /// <summary>
         /// Identificador de cada requesito
         /// </summary>
@@ -17,15 +21,22 @@ namespace Biblioteca_Tomar.Models
         public int Id { get; set; }
 
         /// <summary>
+        /// A referencia ao requesitante
+        /// </summary>
+        [ForeignKey(nameof(Requesitante))]
+        public int RequesitanteFK { get; set; }
+        public Utilizadores Requesitante { get; set; }   // atributo para ser usado no C#. Representa a FK para o numero do Funcionário
+
+        /// <summary>
         /// FK para guardar o  Num do Funcionário
         /// </summary>
         [ForeignKey(nameof(FunE))]  
         public int NFunEnt { get; set; }   // atributo para ser usado no SGBD e no C#. Representa a FK para o numero do Funcionário
-        public Users FunE { get; set; }   // atributo para ser usado no C#. Representa a FK para o numero do Funcionário
+        public Utilizadores FunE { get; set; }   // atributo para ser usado no C#. Representa a FK para o numero do Funcionário
 
         [ForeignKey(nameof(FunS))]
         public int NFunSaida { get; set; } // atributo para ser usado no SGBD e no C#. Representa a FK para o numero do Funcionário
-        public Users FunS { get; set; }   // atributo para ser usado no C#. Representa a FK para o numero do Funcionário
+        public Utilizadores FunS { get; set; }   // atributo para ser usado no C#. Representa a FK para o numero do Funcionário
 
         /// <summary>
         /// Data da requesiçao dos livros
@@ -40,6 +51,9 @@ namespace Biblioteca_Tomar.Models
         /// <summary>
         /// Multa já acumulada neste requesito
         /// </summary>
-        public int Multa { get; set; }
+        public Decimal Multa { get; set; }
+
+        public ICollection<ReqLivros> ListaLivros { get; set; }
+
     }
 }
