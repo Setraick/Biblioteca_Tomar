@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Biblioteca_Tomar.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210616162428_inicio")]
-    partial class inicio
+    [Migration("20210621115032_Seed")]
+    partial class Seed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.5")
+                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Biblioteca_Tomar.Models.Categorias", b =>
@@ -246,19 +246,19 @@ namespace Biblioteca_Tomar.Data.Migrations
                         {
                             Id = 9,
                             LivroFK = 10,
-                            ReqFK = 9
+                            ReqFK = 8
                         },
                         new
                         {
                             Id = 10,
                             LivroFK = 5,
-                            ReqFK = 10
+                            ReqFK = 1
                         },
                         new
                         {
                             Id = 11,
                             LivroFK = 8,
-                            ReqFK = 11
+                            ReqFK = 5
                         });
                 });
 
@@ -275,25 +275,25 @@ namespace Biblioteca_Tomar.Data.Migrations
                     b.Property<DateTime>("DataDevol")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("FuncionarioFimRequisicaoFK")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FuncionarioInicioRequisicaoFK")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Multa")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("NFunEnt")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NFunSaida")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RequesitanteFK")
+                    b.Property<int>("RequisitanteFK")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NFunEnt");
+                    b.HasIndex("FuncionarioFimRequisicaoFK");
 
-                    b.HasIndex("NFunSaida");
+                    b.HasIndex("FuncionarioInicioRequisicaoFK");
 
-                    b.HasIndex("RequesitanteFK");
+                    b.HasIndex("RequisitanteFK");
 
                     b.ToTable("Requisicoes");
 
@@ -303,80 +303,77 @@ namespace Biblioteca_Tomar.Data.Migrations
                             Id = 1,
                             Data = new DateTime(2019, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataDevol = new DateTime(2019, 5, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuncionarioFimRequisicaoFK = 1,
+                            FuncionarioInicioRequisicaoFK = 1,
                             Multa = 0m,
-                            NFunEnt = 1,
-                            NFunSaida = 1,
-                            RequesitanteFK = 0
+                            RequisitanteFK = 5
                         },
                         new
                         {
                             Id = 2,
                             Data = new DateTime(2019, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataDevol = new DateTime(2019, 5, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuncionarioFimRequisicaoFK = 1,
+                            FuncionarioInicioRequisicaoFK = 1,
                             Multa = 0m,
-                            NFunEnt = 1,
-                            NFunSaida = 1,
-                            RequesitanteFK = 0
+                            RequisitanteFK = 5
                         },
                         new
                         {
                             Id = 3,
                             Data = new DateTime(2019, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataDevol = new DateTime(2019, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuncionarioFimRequisicaoFK = 1,
+                            FuncionarioInicioRequisicaoFK = 1,
                             Multa = 0m,
-                            NFunEnt = 1,
-                            NFunSaida = 1,
-                            RequesitanteFK = 0
+                            RequisitanteFK = 7
                         },
                         new
                         {
                             Id = 4,
                             Data = new DateTime(2021, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataDevol = new DateTime(2021, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuncionarioFimRequisicaoFK = 2,
+                            FuncionarioInicioRequisicaoFK = 2,
                             Multa = 0m,
-                            NFunEnt = 2,
-                            NFunSaida = 2,
-                            RequesitanteFK = 0
+                            RequisitanteFK = 9
                         },
                         new
                         {
                             Id = 5,
                             Data = new DateTime(2019, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataDevol = new DateTime(2019, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuncionarioFimRequisicaoFK = 2,
+                            FuncionarioInicioRequisicaoFK = 1,
                             Multa = 0m,
-                            NFunEnt = 1,
-                            NFunSaida = 2,
-                            RequesitanteFK = 0
+                            RequisitanteFK = 5
                         },
                         new
                         {
                             Id = 6,
                             Data = new DateTime(2013, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataDevol = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuncionarioInicioRequisicaoFK = 1,
                             Multa = 0m,
-                            NFunEnt = 1,
-                            NFunSaida = 0,
-                            RequesitanteFK = 0
+                            RequisitanteFK = 6
                         },
                         new
                         {
                             Id = 7,
                             Data = new DateTime(2012, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataDevol = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuncionarioInicioRequisicaoFK = 2,
                             Multa = 0m,
-                            NFunEnt = 2,
-                            NFunSaida = 0,
-                            RequesitanteFK = 0
+                            RequisitanteFK = 7
                         },
                         new
                         {
                             Id = 8,
                             Data = new DateTime(2020, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DataDevol = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FuncionarioInicioRequisicaoFK = 1,
                             Multa = 1m,
-                            NFunEnt = 1,
-                            NFunSaida = 0,
-                            RequesitanteFK = 0
+                            RequisitanteFK = 8
                         });
                 });
 
@@ -704,29 +701,27 @@ namespace Biblioteca_Tomar.Data.Migrations
 
             modelBuilder.Entity("Biblioteca_Tomar.Models.Requisicoes", b =>
                 {
-                    b.HasOne("Biblioteca_Tomar.Models.Utilizadores", "FunE")
+                    b.HasOne("Biblioteca_Tomar.Models.Utilizadores", "FuncionarioFimRequisicao")
                         .WithMany()
-                        .HasForeignKey("NFunEnt")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("FuncionarioFimRequisicaoFK");
+
+                    b.HasOne("Biblioteca_Tomar.Models.Utilizadores", "FuncionarioInicioRequisicao")
+                        .WithMany()
+                        .HasForeignKey("FuncionarioInicioRequisicaoFK")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Biblioteca_Tomar.Models.Utilizadores", "FunS")
+                    b.HasOne("Biblioteca_Tomar.Models.Utilizadores", "Requisitante")
                         .WithMany()
-                        .HasForeignKey("NFunSaida")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("RequisitanteFK")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Biblioteca_Tomar.Models.Utilizadores", "Requesitante")
-                        .WithMany()
-                        .HasForeignKey("RequesitanteFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("FuncionarioFimRequisicao");
 
-                    b.Navigation("FunE");
+                    b.Navigation("FuncionarioInicioRequisicao");
 
-                    b.Navigation("FunS");
-
-                    b.Navigation("Requesitante");
+                    b.Navigation("Requisitante");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

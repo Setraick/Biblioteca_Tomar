@@ -21,22 +21,25 @@ namespace Biblioteca_Tomar.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// A referencia ao requesitante
+        /// A referencia ao requisitante
         /// </summary>
-        [ForeignKey(nameof(Requesitante))]
-        public int RequesitanteFK { get; set; }
-        public Utilizadores Requesitante { get; set; }   // atributo para ser usado no C#. Representa a FK para o numero do Funcionário
+        [ForeignKey(nameof(Requisitante))]
+        public int RequisitanteFK { get; set; }
+        public Utilizadores Requisitante { get; set; }   // atributo para ser usado no C#. Representa a FK para o numero do Funcionário
 
         /// <summary>
-        /// FK para guardar o  Num do Funcionário
+        /// Referencia ao funcionario que entrega o livro
         /// </summary>
-        [ForeignKey(nameof(FunE))]  
-        public int NFunEnt { get; set; }   // atributo para ser usado no SGBD e no C#. Representa a FK para o numero do Funcionário
-        public Utilizadores FunE { get; set; }   // atributo para ser usado no C#. Representa a FK para o numero do Funcionário
+        [ForeignKey(nameof(FuncionarioInicioRequisicao))]  
+        public int FuncionarioInicioRequisicaoFK { get; set; }   // atributo para ser usado no SGBD e no C#. Representa a FK para o numero do Funcionário
+        public Utilizadores FuncionarioInicioRequisicao { get; set; }   // atributo para ser usado no C#. Representa a FK para o numero do Funcionário
 
-        [ForeignKey(nameof(FunS))]
-        public int NFunSaida { get; set; } // atributo para ser usado no SGBD e no C#. Representa a FK para o numero do Funcionário
-        public Utilizadores FunS { get; set; }   // atributo para ser usado no C#. Representa a FK para o numero do Funcionário
+        /// <summary>
+        /// Referencia ao funcionario que recebe o livro
+        /// </summary>
+        [ForeignKey(nameof(FuncionarioFimRequisicao))]
+        public int? FuncionarioFimRequisicaoFK { get; set; } // atributo para ser usado no SGBD e no C#. Representa a FK para o numero do Funcionário
+        public Utilizadores FuncionarioFimRequisicao { get; set; }   // atributo para ser usado no C#. Representa a FK para o numero do Funcionário
 
         /// <summary>
         /// Data da requesiçao dos livros

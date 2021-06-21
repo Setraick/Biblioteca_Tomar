@@ -54,14 +54,14 @@ namespace Biblioteca_Tomar.Data
             );
 
             modelBuilder.Entity<Requisicoes>().HasData(
-               new Requisicoes { Id = 1, NFunEnt = 1, NFunSaida = 1, Data = new DateTime(2019, 5, 20), DataDevol = new DateTime(2019, 5, 21), Multa = 0M },
-               new Requisicoes { Id = 2, NFunEnt = 1, NFunSaida = 1, Data = new DateTime(2019, 5, 20), DataDevol = new DateTime(2019, 5, 21), Multa = 0M },
-               new Requisicoes { Id = 3, NFunEnt = 1, NFunSaida = 1, Data = new DateTime(2019, 11, 18), DataDevol = new DateTime(2019, 11, 19), Multa = 0M },
-               new Requisicoes { Id = 4, NFunEnt = 2, NFunSaida = 2, Data = new DateTime(2021, 1, 17), DataDevol = new DateTime(2021, 1, 18), Multa = 0M },
-               new Requisicoes { Id = 5, NFunEnt = 1, NFunSaida = 2, Data = new DateTime(2019, 3, 7), DataDevol = new DateTime(2019, 3, 8), Multa = 0M },
-               new Requisicoes { Id = 6, NFunEnt = 1, Data = new DateTime(2013, 10, 21), Multa = 0M },
-               new Requisicoes { Id = 7, NFunEnt = 2, Data = new DateTime(2012, 10, 1), Multa = 0M },
-               new Requisicoes { Id = 8, NFunEnt = 1, Data = new DateTime(2020, 10, 1), Multa = 1M }
+               new Requisicoes { Id = 1, RequisitanteFK = 5, FuncionarioInicioRequisicaoFK = 1, FuncionarioFimRequisicaoFK = 1, Data = new DateTime(2019, 5, 20), DataDevol = new DateTime(2019, 5, 21), Multa = 0M },
+               new Requisicoes { Id = 2, RequisitanteFK = 5, FuncionarioInicioRequisicaoFK = 1, FuncionarioFimRequisicaoFK = 1, Data = new DateTime(2019, 5, 20), DataDevol = new DateTime(2019, 5, 21), Multa = 0M },
+               new Requisicoes { Id = 3, RequisitanteFK = 7, FuncionarioInicioRequisicaoFK = 1, FuncionarioFimRequisicaoFK = 1, Data = new DateTime(2019, 11, 18), DataDevol = new DateTime(2019, 11, 19), Multa = 0M },
+               new Requisicoes { Id = 4, RequisitanteFK = 9, FuncionarioInicioRequisicaoFK = 2, FuncionarioFimRequisicaoFK = 2, Data = new DateTime(2021, 1, 17), DataDevol = new DateTime(2021, 1, 18), Multa = 0M },
+               new Requisicoes { Id = 5, RequisitanteFK = 5, FuncionarioInicioRequisicaoFK = 1, FuncionarioFimRequisicaoFK = 2, Data = new DateTime(2019, 3, 7), DataDevol = new DateTime(2019, 3, 8), Multa = 0M },
+               new Requisicoes { Id = 6, RequisitanteFK = 6, FuncionarioInicioRequisicaoFK = 1, Data = new DateTime(2013, 10, 21), Multa = 0M },
+               new Requisicoes { Id = 7, RequisitanteFK = 7, FuncionarioInicioRequisicaoFK = 2, Data = new DateTime(2012, 10, 1), Multa = 0M },
+               new Requisicoes { Id = 8, RequisitanteFK = 8, FuncionarioInicioRequisicaoFK = 1, Data = new DateTime(2020, 10, 1), Multa = 1M }
             );
 
             modelBuilder.Entity<ReqLivros>().HasData(
@@ -73,9 +73,9 @@ namespace Biblioteca_Tomar.Data
                new ReqLivros { Id = 6, ReqFK = 6, LivroFK = 7 },
                new ReqLivros { Id = 7, ReqFK = 7, LivroFK = 8 },
                new ReqLivros { Id = 8, ReqFK = 8, LivroFK = 9 },
-               new ReqLivros { Id = 9, ReqFK = 9, LivroFK = 10 },
-               new ReqLivros { Id = 10, ReqFK = 10, LivroFK = 5 },
-               new ReqLivros { Id = 11, ReqFK = 11, LivroFK = 8 }
+               new ReqLivros { Id = 9, ReqFK = 8, LivroFK = 10 },
+               new ReqLivros { Id = 10, ReqFK = 1, LivroFK = 5 },
+               new ReqLivros { Id = 11, ReqFK = 5, LivroFK = 8 }
             );
 
         }

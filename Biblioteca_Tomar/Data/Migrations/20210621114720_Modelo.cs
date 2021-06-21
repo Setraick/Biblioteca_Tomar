@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Biblioteca_Tomar.Data.Migrations
 {
-    public partial class inicio : Migration
+    public partial class Modelo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -65,9 +65,9 @@ namespace Biblioteca_Tomar.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RequesitanteFK = table.Column<int>(type: "int", nullable: false),
-                    NFunEnt = table.Column<int>(type: "int", nullable: false),
-                    NFunSaida = table.Column<int>(type: "int", nullable: false),
+                    RequisitanteFK = table.Column<int>(type: "int", nullable: false),
+                    FuncionarioInicioRequisicaoFK = table.Column<int>(type: "int", nullable: false),
+                    FuncionarioFimRequisicaoFK = table.Column<int>(type: "int", nullable: true),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataDevol = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Multa = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
@@ -76,23 +76,23 @@ namespace Biblioteca_Tomar.Data.Migrations
                 {
                     table.PrimaryKey("PK_Requisicoes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Requisicoes_Utilizadores_NFunEnt",
-                        column: x => x.NFunEnt,
+                        name: "FK_Requisicoes_Utilizadores_FuncionarioFimRequisicaoFK",
+                        column: x => x.FuncionarioFimRequisicaoFK,
                         principalTable: "Utilizadores",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Requisicoes_Utilizadores_NFunSaida",
-                        column: x => x.NFunSaida,
+                        name: "FK_Requisicoes_Utilizadores_FuncionarioInicioRequisicaoFK",
+                        column: x => x.FuncionarioInicioRequisicaoFK,
                         principalTable: "Utilizadores",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Requisicoes_Utilizadores_RequesitanteFK",
-                        column: x => x.RequesitanteFK,
+                        name: "FK_Requisicoes_Utilizadores_RequisitanteFK",
+                        column: x => x.RequisitanteFK,
                         principalTable: "Utilizadores",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -121,83 +121,6 @@ namespace Biblioteca_Tomar.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Categorias",
-                columns: new[] { "Id", "Designacao", "Seccao" },
-                values: new object[,]
-                {
-                    { 1, "Ação", 0 },
-                    { 2, "Autobiografia", 0 },
-                    { 3, "Artbook", 0 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Utilizadores",
-                columns: new[] { "Id", "Email", "Nome", "Telemovel" },
-                values: new object[,]
-                {
-                    { 1, "Marisa.Freitas@iol.pt", "Marisa Vieira", "967197885" },
-                    { 2, "Fátima.Machado@gmail.com", "Fátima Ribeiro", "963737476" },
-                    { 4, "Paula.Lopes@iol.pt", "Paula Silva", "967517256" },
-                    { 5, "Mariline.Martins@sapo.pt", "Mariline Marques", "967212144" },
-                    { 6, "Marcos.Rocha@sapo.pt", "Marcos Rocha", "962125638" },
-                    { 7, "Alexandre.Dias@hotmail.com", "Alexandre Vieira", "961493756" },
-                    { 8, "Paula.Vieira@clix.pt", "Paula Soares", "961937768" },
-                    { 9, "Mariline.Ribeiro@iol.pt", "Mariline Santos", "964106478" },
-                    { 10, "Roberto.Vieira@sapo.pt", "Roberto Pinto", "964685937" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Livros",
-                columns: new[] { "Id", "Autor", "CategoriaFK", "FotoCapa", "ISBN", "Titulo" },
-                values: new object[,]
-                {
-                    { 1, "Marisa Vieira", 1, null, null, "Aguia da Quinta do Conde" },
-                    { 11, "Marisa Vieira", 3, null, null, "Garnet do Quintal de Cima" },
-                    { 8, "Marisa Vieira", 3, null, null, "Forte da Flecha do Indio" },
-                    { 10, "Marisa Vieira", 2, null, null, "Garfunkle da Quinta do Lordy" },
-                    { 7, "Marisa Vieira", 2, null, null, "Gardenia da Tapada de Cima" },
-                    { 9, "Marisa Vieira", 3, null, null, "Garbo da Flecha do Indio" },
-                    { 5, "Marisa Vieira", 2, null, null, "Alabaster da Casa do Sobreiral" },
-                    { 4, "Marisa Vieira", 2, null, null, "Albert do Canto do Bairro Pimenta" },
-                    { 3, "Marisa Vieira", 1, null, null, "Aladim do Canto do Bairro Pimenta" },
-                    { 2, "Marisa Vieira", 1, null, null, "Aileen da Quinta do Lordy" },
-                    { 6, "Marisa Vieira", 2, null, null, "Gannett do Quintal de Cima" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Requisicoes",
-                columns: new[] { "Id", "Data", "DataDevol", "Multa", "NFunEnt", "NFunSaida", "RequesitanteFK" },
-                values: new object[,]
-                {
-                    { 5, new DateTime(2019, 3, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 3, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 1, 2, 0 },
-                    { 1, new DateTime(2019, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 5, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 1, 1, 0 },
-                    { 2, new DateTime(2019, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 5, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 1, 1, 0 },
-                    { 3, new DateTime(2019, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 1, 1, 0 },
-                    { 6, new DateTime(2013, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 1, 0, 0 },
-                    { 8, new DateTime(2020, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1m, 1, 0, 0 },
-                    { 4, new DateTime(2021, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 2, 2, 0 },
-                    { 7, new DateTime(2012, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, 2, 0, 0 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ReqLivros",
-                columns: new[] { "Id", "LivroFK", "ReqFK" },
-                values: new object[,]
-                {
-                    { 10, 5, 10 },
-                    { 9, 10, 9 },
-                    { 11, 8, 11 },
-                    { 1, 1, 1 },
-                    { 2, 2, 2 },
-                    { 3, 4, 3 },
-                    { 6, 7, 6 },
-                    { 8, 9, 8 },
-                    { 4, 5, 4 },
-                    { 5, 6, 5 },
-                    { 7, 8, 7 }
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Livros_CategoriaFK",
                 table: "Livros",
@@ -214,19 +137,19 @@ namespace Biblioteca_Tomar.Data.Migrations
                 column: "ReqFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Requisicoes_NFunEnt",
+                name: "IX_Requisicoes_FuncionarioFimRequisicaoFK",
                 table: "Requisicoes",
-                column: "NFunEnt");
+                column: "FuncionarioFimRequisicaoFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Requisicoes_NFunSaida",
+                name: "IX_Requisicoes_FuncionarioInicioRequisicaoFK",
                 table: "Requisicoes",
-                column: "NFunSaida");
+                column: "FuncionarioInicioRequisicaoFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Requisicoes_RequesitanteFK",
+                name: "IX_Requisicoes_RequisitanteFK",
                 table: "Requisicoes",
-                column: "RequesitanteFK");
+                column: "RequisitanteFK");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
