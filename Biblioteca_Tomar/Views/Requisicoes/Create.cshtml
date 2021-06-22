@@ -1,0 +1,59 @@
+﻿@model Biblioteca_Tomar.Models.Requisicoes
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Requisicoes</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @*<label asp-for="RequisitanteFK" class="control-label"></label>
+                <select asp-for="RequisitanteFK" class="form-control" asp-items="ViewBag.RequesitanteFK">
+                    <option value="0">Escolha o Requesitante, por favor.</option>
+                </select>*@
+                <label asp-for="RequisitanteFK" class="control-label"></label>
+                <select asp-for="RequisitanteFK" class="form-control">
+                    @foreach (var key in ViewBag.Utilizadores.Nome)
+                    {
+                        <optgroup label="@key.Key">
+                            @foreach (var type in key.Value)
+                            {
+                                <option value="@type">@type</option>
+                            }
+                        </optgroup>
+                    }
+
+                </select>
+                <span asp-validation-for="RequisitanteFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FuncionarioInicioRequisicaoFK" class="control-label"></label>
+                <select asp-for="FuncionarioInicioRequisicaoFK" class="form-control" asp-items="ViewBag.NFunEnt">
+                    <option value="0">Escolha o Funcionario, por favor.</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Data" class="control-label"></label>
+                <input asp-for="Data" class="form-control" />
+                <span asp-validation-for="Data" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

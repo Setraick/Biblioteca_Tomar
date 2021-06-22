@@ -10,43 +10,75 @@
     <h4>Requisicoes</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Requisitante)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Requisitante.Email)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Requisitante.Nome)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FuncionarioInicioRequisicao)
+        <dt></dt>
+        <dt class="col-sm-2">
+            Funcionário que entregou os livros
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FuncionarioInicioRequisicao.Email)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FuncionarioInicioRequisicao.Nome)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FuncionarioFimRequisicao)
+        <dt></dt>
+        <dt></dt>
+        <dt class="col-sm-2">
+            Funcionário que recebeu os livros
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FuncionarioFimRequisicao.Email)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FuncionarioFimRequisicao.Nome)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Data)
+        <dt></dt>
+        <dt></dt>
+        <dt class="col-sm-2">
+            Data da requisição
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Data)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataDevol)
+        <dt></dt>
+        <dt class="col-sm-2">
+            Data da devolução
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DataDevol)
         </dd>
-        <dt class = "col-sm-2">
+        <dt></dt>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Multa)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Multa)
         </dd>
     </dl>
+</div>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Livros
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Livros in Model.ListaLivros)
+            { // listar todas as faixas Associadas aos albuns que está em exibição
+                <tr>
+                    <a asp-controller="Livros" asp-action="Details" asp-route-id="@Livros.Livro.Id">
+                        @Livros.Livro.Titulo
+                    </a>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |

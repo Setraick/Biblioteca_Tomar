@@ -1,0 +1,37 @@
+﻿@model Biblioteca_Tomar.Models.Requisicoes
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Requisicoes</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Revoke">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FuncionarioFimRequisicaoFK" class="control-label"></label>
+                <select asp-for="FuncionarioFimRequisicaoFK" class ="form-control" asp-items="ViewBag.NFunSaida"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataDevol" class="control-label"></label>
+                <input asp-for="DataDevol" class="form-control" />
+                <span asp-validation-for="DataDevol" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

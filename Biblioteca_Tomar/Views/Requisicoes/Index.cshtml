@@ -24,41 +24,30 @@
             <th>
                 @Html.DisplayNameFor(model => model.Data)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataDevol)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Multa)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Requisitante.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FuncionarioInicioRequisicao.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FuncionarioFimRequisicao.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataDevol)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Multa)
-            </td>
-            <td>
-                <a asp-action="Revoke" asp-route-id="@item.Id">Revoke</a> |
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Requisitante.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FuncionarioInicioRequisicao.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FuncionarioFimRequisicao.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+<td>
+                <a asp-action="Revoke" asp-route-id="@item.Id">Fazer a Devolução</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">eliminar</a>
             </td>
         </tr>
 }
