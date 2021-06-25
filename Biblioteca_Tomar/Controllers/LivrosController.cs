@@ -15,7 +15,7 @@ using System.IO;
 
 namespace Biblioteca_Tomar.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class LivrosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -82,7 +82,6 @@ namespace Biblioteca_Tomar.Controllers
 
             var livros = await _context.Livros
                 .Include(l => l.Categoria)
-                //.Include(v => v.ListaDeUtilizadores)
                 //.ThenInclude(uv => uv.Id.LivroFK == _userManager.GetUserId(User))
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (livros == null)

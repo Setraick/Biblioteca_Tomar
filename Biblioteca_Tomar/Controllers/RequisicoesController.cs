@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Biblioteca_Tomar.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class RequisicoesController : Controller
     {
         private readonly ApplicationDbContext _context;

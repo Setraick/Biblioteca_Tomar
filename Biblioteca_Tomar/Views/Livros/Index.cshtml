@@ -5,60 +5,62 @@
 }
 
 <h1>Livros disponiveis na biblioteca</h1>
-@if (User.Identity.IsAuthenticated)
-{
+@*@if (User.Identity.IsAuthenticated)
+{*@
     <p>
         <a asp-action="Create">Adicionar um livro novo</a>
     </p>
-}
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Foto da capa
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Titulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Autor)
-            </th>
+@*}*@
+<div class="tableFixHead">
+    <table class="table tableText">
+        <thead>
+            <tr>
+                <th>
+                    Foto da capa
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Titulo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Categoria)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Autor)
+                </th>
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FotoCapa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Titulo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categoria.Designacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Autor)
-            </td>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FotoCapa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Categoria.Designacao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Autor)
+                    </td>
 
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
 
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <p>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
-                    </p>
-                }
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <p>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                            </p>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>

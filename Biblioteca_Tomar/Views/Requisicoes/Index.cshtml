@@ -9,50 +9,53 @@
 <p>
     <a asp-action="Create">Adicionar uma nova requesição</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Requisitante)
-            </th>
-            <th>
-                Funcionário Requisição
-            </th>
-            <th>
-                Funcionário Devolução
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Data)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="tableFixHead">
+    <table class="table tableText">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Requisitante.Nome)
-                </td>
-                @if (User.Identity.IsAuthenticated)
-                {
+                <th>
+                    @Html.DisplayNameFor(model => model.Requisitante)
+                </th>
+                <th>
+                    Funcionário Requisição
+                </th>
+                <th>
+                    Funcionário Devolução
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Requisitante.Nome)
+                    </td>
+                    @*if (User.Identity.IsAuthenticated)
+                        {*@
                     <td>
                         @Html.DisplayFor(modelItem => item.FuncionarioInicioRequisicao.Nome)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FuncionarioFimRequisicao.Nome)
                     </td>
-                }
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data)
-                </td>
-                <td>
-                    <a asp-action="Revoke" asp-route-id="@item.Id">Fazer a Devolução</a> |
-                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">eliminar</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                    @*}*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td>
+                        <a asp-action="Revoke" asp-route-id="@item.Id">Fazer a Devolução</a> |
+                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+</div>
+
+    </table>

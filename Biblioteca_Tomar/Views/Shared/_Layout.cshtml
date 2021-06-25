@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
+    <header class="darkheader">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow mb-3">
+            <div class="container darkheader">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Biblioteca_Tomar</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +19,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Livros" /*asp-action ="Livros" */ >Livros</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Livros" /*asp-action ="Livros" * />Livros</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Requisicoes" /*asp-action ="Requisicoes" * />Requisicoes</a>
@@ -36,9 +36,19 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted lighttheme">
         <div class="container">
-            &copy; 2021 - Biblioteca_Tomar - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-6">
+
+                    &copy; 2021 - Biblioteca_Tomar - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+                <div class="col-6">
+                    <div class="buttondark float-right">
+                        <button class="nightModeButton ">Dark Mode</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
