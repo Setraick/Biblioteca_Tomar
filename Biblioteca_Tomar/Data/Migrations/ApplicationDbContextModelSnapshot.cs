@@ -76,8 +76,8 @@ namespace Biblioteca_Tomar.Data.Migrations
                     b.Property<string>("FotoCapa")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ISBN")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("ISBN")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Titulo")
                         .IsRequired()
@@ -96,6 +96,8 @@ namespace Biblioteca_Tomar.Data.Migrations
                             Id = 1,
                             Autor = "Marisa Vieira",
                             CategoriaFK = 1,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = 467891231231L,
                             Titulo = "Aguia da Quinta do Conde"
                         },
                         new
@@ -103,6 +105,8 @@ namespace Biblioteca_Tomar.Data.Migrations
                             Id = 2,
                             Autor = "Marisa Vieira",
                             CategoriaFK = 1,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = 456891231231L,
                             Titulo = "Aileen da Quinta do Lordy"
                         },
                         new
@@ -110,6 +114,8 @@ namespace Biblioteca_Tomar.Data.Migrations
                             Id = 3,
                             Autor = "Marisa Vieira",
                             CategoriaFK = 1,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = 456781231231L,
                             Titulo = "Aladim do Canto do Bairro Pimenta"
                         },
                         new
@@ -117,6 +123,8 @@ namespace Biblioteca_Tomar.Data.Migrations
                             Id = 4,
                             Autor = "Marisa Vieira",
                             CategoriaFK = 2,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = 456891231231L,
                             Titulo = "Albert do Canto do Bairro Pimenta"
                         },
                         new
@@ -124,6 +132,8 @@ namespace Biblioteca_Tomar.Data.Migrations
                             Id = 5,
                             Autor = "Marisa Vieira",
                             CategoriaFK = 2,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = 456789231231L,
                             Titulo = "Alabaster da Casa do Sobreiral"
                         },
                         new
@@ -131,6 +141,8 @@ namespace Biblioteca_Tomar.Data.Migrations
                             Id = 6,
                             Autor = "Marisa Vieira",
                             CategoriaFK = 2,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = 456789123123L,
                             Titulo = "Gannett do Quintal de Cima"
                         },
                         new
@@ -138,6 +150,8 @@ namespace Biblioteca_Tomar.Data.Migrations
                             Id = 7,
                             Autor = "Marisa Vieira",
                             CategoriaFK = 2,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = 567894123131L,
                             Titulo = "Gardenia da Tapada de Cima"
                         },
                         new
@@ -145,6 +159,8 @@ namespace Biblioteca_Tomar.Data.Migrations
                             Id = 8,
                             Autor = "Marisa Vieira",
                             CategoriaFK = 3,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = 456789123121L,
                             Titulo = "Forte da Flecha do Indio"
                         },
                         new
@@ -152,6 +168,8 @@ namespace Biblioteca_Tomar.Data.Migrations
                             Id = 9,
                             Autor = "Marisa Vieira",
                             CategoriaFK = 3,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = 456789123231L,
                             Titulo = "Garbo da Flecha do Indio"
                         },
                         new
@@ -159,6 +177,8 @@ namespace Biblioteca_Tomar.Data.Migrations
                             Id = 10,
                             Autor = "Marisa Vieira",
                             CategoriaFK = 2,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = 456789131231L,
                             Titulo = "Garfunkle da Quinta do Lordy"
                         },
                         new
@@ -166,6 +186,8 @@ namespace Biblioteca_Tomar.Data.Migrations
                             Id = 11,
                             Autor = "Marisa Vieira",
                             CategoriaFK = 3,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = 456789231231L,
                             Titulo = "Garnet do Quintal de Cima"
                         });
                 });

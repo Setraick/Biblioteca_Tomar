@@ -40,17 +40,17 @@ namespace Biblioteca_Tomar.Data
             );
 
             modelBuilder.Entity<Livros>().HasData(
-               new Livros { Id = 1, Titulo = "Aguia da Quinta do Conde", Autor = "Marisa Vieira", CategoriaFK = 1 },
-               new Livros { Id = 2, Titulo = "Aileen da Quinta do Lordy", Autor = "Marisa Vieira", CategoriaFK = 1 },
-               new Livros { Id = 3, Titulo = "Aladim do Canto do Bairro Pimenta", Autor = "Marisa Vieira", CategoriaFK = 1 },
-               new Livros { Id = 4, Titulo = "Albert do Canto do Bairro Pimenta", Autor = "Marisa Vieira", CategoriaFK = 2 },
-               new Livros { Id = 5, Titulo = "Alabaster da Casa do Sobreiral", Autor = "Marisa Vieira", CategoriaFK = 2 },
-               new Livros { Id = 6, Titulo = "Gannett do Quintal de Cima", Autor = "Marisa Vieira", CategoriaFK = 2 },
-               new Livros { Id = 7, Titulo = "Gardenia da Tapada de Cima", Autor = "Marisa Vieira", CategoriaFK = 2 },
-               new Livros { Id = 8, Titulo = "Forte da Flecha do Indio", Autor = "Marisa Vieira", CategoriaFK = 3 },
-               new Livros { Id = 9, Titulo = "Garbo da Flecha do Indio", Autor = "Marisa Vieira", CategoriaFK = 3 },
-               new Livros { Id = 10, Titulo = "Garfunkle da Quinta do Lordy", Autor = "Marisa Vieira", CategoriaFK = 2 },
-               new Livros { Id = 11, Titulo = "Garnet do Quintal de Cima", Autor = "Marisa Vieira", CategoriaFK = 3 }
+               new Livros { Id = 1, FotoCapa = "LivroCapa.jpg", ISBN = 467891231231, Titulo = "Aguia da Quinta do Conde", Autor = "Marisa Vieira", CategoriaFK = 1 },
+               new Livros { Id = 2, FotoCapa = "LivroCapa.jpg", ISBN = 456891231231, Titulo = "Aileen da Quinta do Lordy", Autor = "Marisa Vieira", CategoriaFK = 1 },
+               new Livros { Id = 3, FotoCapa = "LivroCapa.jpg", ISBN = 456781231231, Titulo = "Aladim do Canto do Bairro Pimenta", Autor = "Marisa Vieira", CategoriaFK = 1 },
+               new Livros { Id = 4, FotoCapa = "LivroCapa.jpg", ISBN = 456891231231, Titulo = "Albert do Canto do Bairro Pimenta", Autor = "Marisa Vieira", CategoriaFK = 2 },
+               new Livros { Id = 5, FotoCapa = "LivroCapa.jpg", ISBN = 456789231231, Titulo = "Alabaster da Casa do Sobreiral", Autor = "Marisa Vieira", CategoriaFK = 2 },
+               new Livros { Id = 6, FotoCapa = "LivroCapa.jpg", ISBN = 456789123123, Titulo = "Gannett do Quintal de Cima", Autor = "Marisa Vieira", CategoriaFK = 2 },
+               new Livros { Id = 7, FotoCapa = "LivroCapa.jpg", ISBN = 567894123131, Titulo = "Gardenia da Tapada de Cima", Autor = "Marisa Vieira", CategoriaFK = 2 },
+               new Livros { Id = 8, FotoCapa = "LivroCapa.jpg", ISBN = 456789123121, Titulo = "Forte da Flecha do Indio", Autor = "Marisa Vieira", CategoriaFK = 3 },
+               new Livros { Id = 9, FotoCapa = "LivroCapa.jpg", ISBN = 456789123231, Titulo = "Garbo da Flecha do Indio", Autor = "Marisa Vieira", CategoriaFK = 3 },
+               new Livros { Id = 10, FotoCapa = "LivroCapa.jpg", ISBN = 456789131231, Titulo = "Garfunkle da Quinta do Lordy", Autor = "Marisa Vieira", CategoriaFK = 2 },
+               new Livros { Id = 11, FotoCapa = "LivroCapa.jpg", ISBN = 456789231231, Titulo = "Garnet do Quintal de Cima", Autor = "Marisa Vieira", CategoriaFK = 3 }
             );
 
             modelBuilder.Entity<Requisicoes>().HasData(

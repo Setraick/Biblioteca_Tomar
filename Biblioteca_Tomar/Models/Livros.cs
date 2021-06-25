@@ -28,19 +28,29 @@ namespace Biblioteca_Tomar.Models
         public string Titulo { get; set; }
 
         /// <summary>
-        /// FK para a Raça do Cão
+        /// FK para a Categoria do livro
         /// </summary>
         [ForeignKey("Categoria")] 
         public int CategoriaFK { get; set; }   // atributo para ser usado no SGBD e no C#. Representa a FK para a Raça do cão
         public Categorias Categoria { get; set; }   // atributo para ser usado no C#. Representa a FK para a Raça do cão
 
-
+        /// <summary>
+        /// Nome do Autor
+        /// </summary>
         [Required(ErrorMessage = "O Autor é de preenchimento obrigatório")]
         [StringLength(60, ErrorMessage = "O {0} não pode ter mais de {1} caracteres.")]
         public string Autor { get; set; }
 
-        public String ISBN { get; set; }
+        /// <summary>
+        /// O numero internacional do livro
+        /// </summary>
+        [Required(ErrorMessage = "O ISBM é de preenchimento obrigatório")]
+        [RegularExpression("{9,13}", ErrorMessage = "Escreva, por favor, um nº entre 9 a 13 digitos. ")]
+        public long ISBN { get; set; }
 
+        /// <summary>
+        /// A foto da capa
+        /// </summary>
         public String FotoCapa { get; set; }
 
         public ICollection<ReqLivros> ListaRequisicoes { get; set; }

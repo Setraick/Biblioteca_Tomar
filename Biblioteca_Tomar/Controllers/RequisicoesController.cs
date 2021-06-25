@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Biblioteca_Tomar.Data;
 using Biblioteca_Tomar.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Biblioteca_Tomar.Controllers
 {
+    [Authorize]
     public class RequisicoesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -50,9 +52,9 @@ namespace Biblioteca_Tomar.Controllers
         // GET: Requisicoes/Create
         public IActionResult Create()
         {
-            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(_context.Utilizadores, "Id", "Email");
+            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(_context.Utilizadores.OrderBy(u => u.Nome), "Id", "Nome");
             //ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(_context.Utilizadores, "Id", "Email");
-            ViewData["RequisitanteFK"] = new SelectList(_context.Utilizadores.OrderBy(c => c.Nome), "Id", "Nome");
+            ViewData["RequisitanteFK"] = new SelectList(_context.Utilizadores.OrderBy(u => u.Nome), "Id", "Nome");
             return View();
         }
 
@@ -86,7 +88,7 @@ namespace Biblioteca_Tomar.Controllers
                 ModelState.AddModelError("", "Não se esqueça de escolher o requisitante...");
             }
 
-            ViewData["RequisitanteFK"] = new SelectList(_context.Utilizadores.OrderBy(c => c.Nome), "Id", "Nome", requisicao.RequisitanteFK);
+            ViewData["RequisitanteFK"] = new SelectList(_context.Utilizadores.OrderBy(u => u.Nome), "Id", "Nome", requisicao.RequisitanteFK);
 
             return View(requisicao);
         }
@@ -130,7 +132,7 @@ namespace Biblioteca_Tomar.Controllers
                 ModelState.AddModelError("", "Não se esqueça de escolher o requisitante...");
             }
 
-            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(_context.Utilizadores.OrderBy(c => c.Nome), "Id", "Nome", requisicao.FuncionarioFimRequisicaoFK);
+            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(_context.Utilizadores.OrderBy(u => u.Nome), "Id", "Nome", requisicao.FuncionarioFimRequisicaoFK);
 
             return View(requisicao);
         }

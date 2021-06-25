@@ -13,11 +13,11 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                @*<label asp-for="RequisitanteFK" class="control-label"></label>
+                <label asp-for="RequisitanteFK" class="control-label"></label>
                 <select asp-for="RequisitanteFK" class="form-control" asp-items="ViewBag.RequesitanteFK">
                     <option value="0">Escolha o Requesitante, por favor.</option>
-                </select>*@
-                <label asp-for="RequisitanteFK" class="control-label"></label>
+                </select>
+                @*<label asp-for="RequisitanteFK" class="control-label"></label>
                 <select asp-for="RequisitanteFK" class="form-control">
                     @foreach (var key in ViewBag.Utilizadores.Nome)
                     {
@@ -29,7 +29,7 @@
                         </optgroup>
                     }
 
-                </select>
+                </select>*@
                 <span asp-validation-for="RequisitanteFK" class="text-danger"></span>
             </div>
             <div class="form-group">
