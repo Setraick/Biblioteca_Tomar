@@ -52,9 +52,11 @@ namespace Biblioteca_Tomar.Controllers
         // GET: Requisicoes/Create
         public IActionResult Create()
         {
-            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(_context.Utilizadores.OrderBy(u => u.Nome), "Id", "Nome");
+            var listaUtilizadores = _context.Utilizadores.OrderBy(u => u.Nome);
+
+            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Nome");
             //ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(_context.Utilizadores, "Id", "Email");
-            ViewData["RequisitanteFK"] = new SelectList(_context.Utilizadores.OrderBy(u => u.Nome), "Id", "Nome");
+            ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores, "Id", "Nome");
             return View();
         }
 

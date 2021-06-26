@@ -45,8 +45,8 @@ namespace Biblioteca_Tomar.Models
         /// O numero internacional do livro
         /// </summary>
         [Required(ErrorMessage = "O ISBM é de preenchimento obrigatório")]
-        [RegularExpression("{9,13}", ErrorMessage = "Escreva, por favor, um nº entre 9 a 13 digitos. ")]
-        public long ISBN { get; set; }
+        [RegularExpression("[0-9Xx-]{9,13}", ErrorMessage = "Escreva, por favor, um nº entre 9 a 13 digitos. ")]
+        public string ISBN { get; set; }
 
         /// <summary>
         /// A foto da capa

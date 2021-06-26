@@ -36,7 +36,13 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.FotoCapa)
+                        <a asp-action="Details" asp-route-id="@item.Id">
+                            <img src="~/Images/@Html.DisplayFor(modelItem => item.FotoCapa)"
+                                 width="50"
+                                 alt="Fotografia do Livro @Html.DisplayFor(modelItem => item.Id)"
+                                 title="@Html.DisplayFor(modelItem => item.Id)" />
+                        </a>
+                        
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Titulo)

@@ -4,88 +4,22 @@ using Biblioteca_Tomar.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Biblioteca_Tomar.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210625162947_CorrecaoISBN")]
+    partial class CorrecaoISBN
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Biblioteca_Tomar.Data.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DataRegisto")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-                });
 
             modelBuilder.Entity("Biblioteca_Tomar.Models.Categorias", b =>
                 {
@@ -163,56 +97,101 @@ namespace Biblioteca_Tomar.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Autor = "Filipe Melo",
+                            Autor = "Marisa Vieira",
                             CategoriaFK = 1,
-                            FotoCapa = "Balada_para_Sophie.jpg",
-                            ISBN = "9789897842825",
-                            Titulo = "Balada para Sophie"
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = "467-91231231",
+                            Titulo = "Aguia da Quinta do Conde"
                         },
                         new
                         {
                             Id = 2,
-                            Autor = "Âncora Editora",
+                            Autor = "Marisa Vieira",
                             CategoriaFK = 1,
-                            FotoCapa = "A_Minha_Terra_e_Linda.jpg",
-                            ISBN = "9789727807673",
-                            Titulo = "A Minha Terra é Linda"
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = "456-91231231",
+                            Titulo = "Aileen da Quinta do Lordy"
                         },
                         new
                         {
                             Id = 3,
-                            Autor = "Hervé Le Tellier",
+                            Autor = "Marisa Vieira",
                             CategoriaFK = 1,
-                            FotoCapa = "A_Anomalia.jpg",
-                            ISBN = "9789722367165",
-                            Titulo = "A Anomalia"
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = "456-81231231",
+                            Titulo = "Aladim do Canto do Bairro Pimenta"
                         },
                         new
                         {
                             Id = 4,
-                            Autor = "João Tordo",
+                            Autor = "Marisa Vieira",
                             CategoriaFK = 2,
-                            FotoCapa = "Aguas_Passadas.jpg",
-                            ISBN = "9789897841071",
-                            Titulo = "Águas Passadas"
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = "456-91231231",
+                            Titulo = "Albert do Canto do Bairro Pimenta"
                         },
                         new
                         {
                             Id = 5,
-                            Autor = "Louise Erdrich",
+                            Autor = "Marisa Vieira",
                             CategoriaFK = 2,
-                            FotoCapa = "The_Night_Watchman.jpg",
-                            ISBN = "9781472155368",
-                            Titulo = "The Night Watchman"
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = "456-89231231",
+                            Titulo = "Alabaster da Casa do Sobreiral"
                         },
                         new
                         {
                             Id = 6,
-                            Autor = "Cassandra Clare",
+                            Autor = "Marisa Vieira",
                             CategoriaFK = 2,
-                            FotoCapa = "The_Last_Hours_Chain_of_Iron.jpg",
-                            ISBN = "9781406358100",
-                            Titulo = "The Last Hours: Chain of Iron"
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = "456-89123123",
+                            Titulo = "Gannett do Quintal de Cima"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Autor = "Marisa Vieira",
+                            CategoriaFK = 2,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = "567-94123131",
+                            Titulo = "Gardenia da Tapada de Cima"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Autor = "Marisa Vieira",
+                            CategoriaFK = 3,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = "456-89123121",
+                            Titulo = "Forte da Flecha do Indio"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Autor = "Marisa Vieira",
+                            CategoriaFK = 3,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = "456-89123231",
+                            Titulo = "Garbo da Flecha do Indio"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Autor = "Marisa Vieira",
+                            CategoriaFK = 2,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = "456-89131231",
+                            Titulo = "Garfunkle da Quinta do Lordy"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Autor = "Marisa Vieira",
+                            CategoriaFK = 3,
+                            FotoCapa = "LivroCapa.jpg",
+                            ISBN = "456-89231231",
+                            Titulo = "Garnet do Quintal de Cima"
                         });
                 });
 
@@ -271,37 +250,37 @@ namespace Biblioteca_Tomar.Data.Migrations
                         new
                         {
                             Id = 6,
-                            LivroFK = 1,
+                            LivroFK = 7,
                             ReqFK = 6
                         },
                         new
                         {
                             Id = 7,
-                            LivroFK = 3,
+                            LivroFK = 8,
                             ReqFK = 7
                         },
                         new
                         {
                             Id = 8,
-                            LivroFK = 4,
+                            LivroFK = 9,
                             ReqFK = 8
                         },
                         new
                         {
                             Id = 9,
-                            LivroFK = 5,
+                            LivroFK = 10,
                             ReqFK = 8
                         },
                         new
                         {
                             Id = 10,
-                            LivroFK = 2,
+                            LivroFK = 5,
                             ReqFK = 1
                         },
                         new
                         {
                             Id = 11,
-                            LivroFK = 3,
+                            LivroFK = 8,
                             ReqFK = 5
                         });
                 });
@@ -564,6 +543,71 @@ namespace Biblioteca_Tomar.Data.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -714,7 +758,7 @@ namespace Biblioteca_Tomar.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Biblioteca_Tomar.Data.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -723,7 +767,7 @@ namespace Biblioteca_Tomar.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Biblioteca_Tomar.Data.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -738,7 +782,7 @@ namespace Biblioteca_Tomar.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Biblioteca_Tomar.Data.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -747,7 +791,7 @@ namespace Biblioteca_Tomar.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Biblioteca_Tomar.Data.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -9,6 +9,12 @@
 <div>
     <h4>Livros</h4>
     <hr />
+    <div class="float-left">
+        <img src="~/Images/@Html.DisplayFor(modelItem => Model.FotoCapa)"
+             width="300"
+             alt="Fotografia do Livro @Html.DisplayFor(modelItem => Model.Id)"
+             title="@Html.DisplayFor(modelItem => Model.Id)" />
+    </div>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Titulo)
@@ -34,18 +40,11 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ISBN)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FotoCapa)
         </dt>
-        <dt class="col-sm-10">
-            <img src="~/Images/@Html.DisplayFor(modelItem => Model.FotoCapa)"
-                 width="20"
-                 alt="Fotografia do video @Html.DisplayFor(modelItem => Model.Id)"
-                 title="@Html.DisplayFor(modelItem => Model.Id)" />
-        </dt>
+        <dd class="col-sm-10">
+            <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </dd> 
     </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
 </div>

@@ -4,11 +4,21 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Biblioteca_Tomar.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
-    {
+        /// <summary>
+        /// classe para recolher os dados particulares dos utilizadores
+        /// </summary>
+        public class ApplicationUser : IdentityUser
+        {
+            //recolhe a data de registo de um utilizador
+            public DateTime DataRegisto { get; set; }
+        }
+        public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+        { 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -40,17 +50,12 @@ namespace Biblioteca_Tomar.Data
             );
 
             modelBuilder.Entity<Livros>().HasData(
-               new Livros { Id = 1, FotoCapa = "LivroCapa.jpg", ISBN = 467891231231, Titulo = "Aguia da Quinta do Conde", Autor = "Marisa Vieira", CategoriaFK = 1 },
-               new Livros { Id = 2, FotoCapa = "LivroCapa.jpg", ISBN = 456891231231, Titulo = "Aileen da Quinta do Lordy", Autor = "Marisa Vieira", CategoriaFK = 1 },
-               new Livros { Id = 3, FotoCapa = "LivroCapa.jpg", ISBN = 456781231231, Titulo = "Aladim do Canto do Bairro Pimenta", Autor = "Marisa Vieira", CategoriaFK = 1 },
-               new Livros { Id = 4, FotoCapa = "LivroCapa.jpg", ISBN = 456891231231, Titulo = "Albert do Canto do Bairro Pimenta", Autor = "Marisa Vieira", CategoriaFK = 2 },
-               new Livros { Id = 5, FotoCapa = "LivroCapa.jpg", ISBN = 456789231231, Titulo = "Alabaster da Casa do Sobreiral", Autor = "Marisa Vieira", CategoriaFK = 2 },
-               new Livros { Id = 6, FotoCapa = "LivroCapa.jpg", ISBN = 456789123123, Titulo = "Gannett do Quintal de Cima", Autor = "Marisa Vieira", CategoriaFK = 2 },
-               new Livros { Id = 7, FotoCapa = "LivroCapa.jpg", ISBN = 567894123131, Titulo = "Gardenia da Tapada de Cima", Autor = "Marisa Vieira", CategoriaFK = 2 },
-               new Livros { Id = 8, FotoCapa = "LivroCapa.jpg", ISBN = 456789123121, Titulo = "Forte da Flecha do Indio", Autor = "Marisa Vieira", CategoriaFK = 3 },
-               new Livros { Id = 9, FotoCapa = "LivroCapa.jpg", ISBN = 456789123231, Titulo = "Garbo da Flecha do Indio", Autor = "Marisa Vieira", CategoriaFK = 3 },
-               new Livros { Id = 10, FotoCapa = "LivroCapa.jpg", ISBN = 456789131231, Titulo = "Garfunkle da Quinta do Lordy", Autor = "Marisa Vieira", CategoriaFK = 2 },
-               new Livros { Id = 11, FotoCapa = "LivroCapa.jpg", ISBN = 456789231231, Titulo = "Garnet do Quintal de Cima", Autor = "Marisa Vieira", CategoriaFK = 3 }
+               new Livros { Id = 1, FotoCapa = "Balada_para_Sophie.jpg", ISBN = "9789897842825", Titulo = "Balada para Sophie", Autor = "Filipe Melo", CategoriaFK = 1 },
+               new Livros { Id = 2, FotoCapa = "A_Minha_Terra_e_Linda.jpg", ISBN = "9789727807673", Titulo = "A Minha Terra é Linda", Autor = "Âncora Editora", CategoriaFK = 1 },
+               new Livros { Id = 3, FotoCapa = "A_Anomalia.jpg", ISBN = "9789722367165", Titulo = "A Anomalia", Autor = "Hervé Le Tellier", CategoriaFK = 1 },
+               new Livros { Id = 4, FotoCapa = "Aguas_Passadas.jpg", ISBN = "9789897841071", Titulo = "Águas Passadas", Autor = "João Tordo", CategoriaFK = 2 },
+               new Livros { Id = 5, FotoCapa = "The_Night_Watchman.jpg", ISBN = "9781472155368", Titulo = "The Night Watchman", Autor = "Louise Erdrich", CategoriaFK = 2 },
+               new Livros { Id = 6, FotoCapa = "The_Last_Hours_Chain_of_Iron.jpg", ISBN = "9781406358100", Titulo = "The Last Hours: Chain of Iron", Autor = "Cassandra Clare", CategoriaFK = 2 }
             );
 
             modelBuilder.Entity<Requisicoes>().HasData(
@@ -70,12 +75,12 @@ namespace Biblioteca_Tomar.Data
                new ReqLivros { Id = 3, ReqFK = 3, LivroFK = 4 },
                new ReqLivros { Id = 4, ReqFK = 4, LivroFK = 5 },
                new ReqLivros { Id = 5, ReqFK = 5, LivroFK = 6 },
-               new ReqLivros { Id = 6, ReqFK = 6, LivroFK = 7 },
-               new ReqLivros { Id = 7, ReqFK = 7, LivroFK = 8 },
-               new ReqLivros { Id = 8, ReqFK = 8, LivroFK = 9 },
-               new ReqLivros { Id = 9, ReqFK = 8, LivroFK = 10 },
-               new ReqLivros { Id = 10, ReqFK = 1, LivroFK = 5 },
-               new ReqLivros { Id = 11, ReqFK = 5, LivroFK = 8 }
+               new ReqLivros { Id = 6, ReqFK = 6, LivroFK = 1 },
+               new ReqLivros { Id = 7, ReqFK = 7, LivroFK = 3 },
+               new ReqLivros { Id = 8, ReqFK = 8, LivroFK = 4 },
+               new ReqLivros { Id = 9, ReqFK = 8, LivroFK = 5 },
+               new ReqLivros { Id = 10, ReqFK = 1, LivroFK = 2 },
+               new ReqLivros { Id = 11, ReqFK = 5, LivroFK = 3 }
             );
 
         }

@@ -29,9 +29,9 @@ namespace Biblioteca_Tomar.Controllers
         /// Atributo que irá receber todos os dados referentes à
         /// pessoa q se autenticou no sistema
         /// </summary>
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public LivrosController(ApplicationDbContext context, IWebHostEnvironment dadosServidor, UserManager<IdentityUser> userManager)
+        public LivrosController(ApplicationDbContext context, IWebHostEnvironment dadosServidor, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _dadosServidor = dadosServidor;
@@ -112,7 +112,7 @@ namespace Biblioteca_Tomar.Controllers
             if (fotoLivro == null)
             {
                 //não ha ficheiro
-                ModelState.AddModelError("", "Adicione por favor a capa do video");
+                ModelState.AddModelError("", "Adicione por favor a capa do Livro");
                 ViewData["Id"] = new SelectList(_context.Livros.OrderBy(v => v.Titulo), "Id", "Titulo", livros.Id);
                 return View(livros);
             }
@@ -131,7 +131,7 @@ namespace Biblioteca_Tomar.Controllers
                     // agora, consigo ter o nome final do ficheiro
                     nomeImagem = nomeImagem + extensao;
 
-                    // associar este ficheiro aos dados da Fotografia do cão
+                    // associar este ficheiro aos dados da Fotografia do Livro
                     livros.FotoCapa = nomeImagem;
 
                     // localização do armazenamento da imagem
