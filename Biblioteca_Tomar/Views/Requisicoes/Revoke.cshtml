@@ -1,20 +1,37 @@
 ﻿@model Biblioteca_Tomar.Models.Requisicoes
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Revoke";
 }
 
-<h1>Create</h1>
+<h1>Devolução</h1>
 
-<h4>Requisicoes</h4>
+<h4>Requisições</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Revoke">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="RequisitanteFK" class="control-label"></label>
+                <select asp-for="RequisitanteFK" class="form-control" asp-items="ViewBag.RequisitanteFK"></select>
+                <span asp-validation-for="RequisitanteFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FuncionarioInicioRequisicaoFK" class="control-label"></label>
+                <select asp-for="FuncionarioInicioRequisicaoFK" class="form-control" asp-items="ViewBag.FuncionarioInicioRequisicaoFK"></select>
+                <span asp-validation-for="FuncionarioInicioRequisicaoFK" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="FuncionarioFimRequisicaoFK" class="control-label"></label>
-                <select asp-for="FuncionarioFimRequisicaoFK" class ="form-control" asp-items="ViewBag.NFunSaida"></select>
+                <select asp-for="FuncionarioFimRequisicaoFK" class="form-control" asp-items="ViewBag.FuncionarioFimRequisicaoFK"></select>
+                <span asp-validation-for="FuncionarioFimRequisicaoFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Data" class="control-label"></label>
+                <input asp-for="Data" class="form-control" />
+                <span asp-validation-for="Data" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DataDevol" class="control-label"></label>
@@ -22,14 +39,19 @@
                 <span asp-validation-for="DataDevol" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="Multa" class="control-label"></label>
+                <input asp-for="Multa" class="form-control" />
+                <span asp-validation-for="Multa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {

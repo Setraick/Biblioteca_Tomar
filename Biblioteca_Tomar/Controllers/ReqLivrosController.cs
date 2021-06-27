@@ -10,28 +10,23 @@ using Biblioteca_Tomar.Models;
 
 namespace Biblioteca_Tomar.Controllers
 {
-    public class UtilizadoresController : Controller
+    public class ReqLivrosController : Controller
     {
-        /// <summary>
-        /// referência à base de dados
-        /// </summary>
         private readonly ApplicationDbContext _context;
 
-        /// <summary>
-        /// objeto que sabe interagir com os dados do utilizador que se autêntica
-        /// </summary>
-        public UtilizadoresController(ApplicationDbContext context)
+        public ReqLivrosController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Utilizadores
+        // GET: ReqLivros
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Utilizadores.ToListAsync());
+            var applicationDbContext = _context.ReqLivros.Include(r => r.Livro).Include(r => r.Req);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Utilizadores/Details/5
+        // GET: ReqLivros/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,39 +34,45 @@ namespace Biblioteca_Tomar.Controllers
                 return NotFound();
             }
 
-            var utilizadores = await _context.Utilizadores
+            var reqLivros = await _context.ReqLivros
+                .Include(r => r.Livro)
+                .Include(r => r.Req)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (utilizadores == null)
+            if (reqLivros == null)
             {
                 return NotFound();
             }
 
-            return View(utilizadores);
+            return View(reqLivros);
         }
 
-        // GET: Utilizadores/Create
+        // GET: ReqLivros/Create
         public IActionResult Create()
         {
+            ViewData["LivroFK"] = new SelectList(_context.Livros, "Id", "Autor");
+            ViewData["ReqFK"] = new SelectList(_context.Requisicoes, "Id", "Id");
             return View();
         }
 
-        // POST: Utilizadores/Create
+        // POST: ReqLivros/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Telemovel,Email")] Utilizadores utilizadores)
+        public async Task<IActionResult> Create([Bind("Id,ReqFK,LivroFK")] ReqLivros reqLivros)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(utilizadores);
+                _context.Add(reqLivros);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(utilizadores);
+            ViewData["LivroFK"] = new SelectList(_context.Livros, "Id", "Autor", reqLivros.LivroFK);
+            ViewData["ReqFK"] = new SelectList(_context.Requisicoes, "Id", "Id", reqLivros.ReqFK);
+            return View(reqLivros);
         }
 
-        // GET: Utilizadores/Edit/5
+        // GET: ReqLivros/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -79,22 +80,24 @@ namespace Biblioteca_Tomar.Controllers
                 return NotFound();
             }
 
-            var utilizadores = await _context.Utilizadores.FindAsync(id);
-            if (utilizadores == null)
+            var reqLivros = await _context.ReqLivros.FindAsync(id);
+            if (reqLivros == null)
             {
                 return NotFound();
             }
-            return View(utilizadores);
+            ViewData["LivroFK"] = new SelectList(_context.Livros, "Id", "Autor", reqLivros.LivroFK);
+            ViewData["ReqFK"] = new SelectList(_context.Requisicoes, "Id", "Id", reqLivros.ReqFK);
+            return View(reqLivros);
         }
 
-        // POST: Utilizadores/Edit/5
+        // POST: ReqLivros/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Telemovel,Email")] Utilizadores utilizadores)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ReqFK,LivroFK")] ReqLivros reqLivros)
         {
-            if (id != utilizadores.Id)
+            if (id != reqLivros.Id)
             {
                 return NotFound();
             }
@@ -103,12 +106,12 @@ namespace Biblioteca_Tomar.Controllers
             {
                 try
                 {
-                    _context.Update(utilizadores);
+                    _context.Update(reqLivros);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UtilizadoresExists(utilizadores.Id))
+                    if (!ReqLivrosExists(reqLivros.Id))
                     {
                         return NotFound();
                     }
@@ -119,10 +122,12 @@ namespace Biblioteca_Tomar.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(utilizadores);
+            ViewData["LivroFK"] = new SelectList(_context.Livros, "Id", "Autor", reqLivros.LivroFK);
+            ViewData["ReqFK"] = new SelectList(_context.Requisicoes, "Id", "Id", reqLivros.ReqFK);
+            return View(reqLivros);
         }
 
-        // GET: Utilizadores/Delete/5
+        // GET: ReqLivros/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,30 +135,32 @@ namespace Biblioteca_Tomar.Controllers
                 return NotFound();
             }
 
-            var utilizadores = await _context.Utilizadores
+            var reqLivros = await _context.ReqLivros
+                .Include(r => r.Livro)
+                .Include(r => r.Req)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (utilizadores == null)
+            if (reqLivros == null)
             {
                 return NotFound();
             }
 
-            return View(utilizadores);
+            return View(reqLivros);
         }
 
-        // POST: Utilizadores/Delete/5
+        // POST: ReqLivros/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var utilizadores = await _context.Utilizadores.FindAsync(id);
-            _context.Utilizadores.Remove(utilizadores);
+            var reqLivros = await _context.ReqLivros.FindAsync(id);
+            _context.ReqLivros.Remove(reqLivros);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UtilizadoresExists(int id)
+        private bool ReqLivrosExists(int id)
         {
-            return _context.Utilizadores.Any(e => e.Id == id);
+            return _context.ReqLivros.Any(e => e.Id == id);
         }
     }
 }

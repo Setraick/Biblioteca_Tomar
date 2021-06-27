@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Requisitos existentes</h1>
+<h1>Requisições existentes</h1>
 
 <p>
     <a asp-action="Create">Adicionar uma nova requesição</a>
@@ -25,35 +25,38 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Data)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Multa)
+                </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Requisitante.Nome)
-                    </td>
-                    @*if (User.Identity.IsAuthenticated)
-                        {*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FuncionarioInicioRequisicao.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FuncionarioFimRequisicao.Nome)
-                    </td>
-                    @*}*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Data)
-                    </td>
-                    <td>
-                        <a asp-action="Revoke" asp-route-id="@item.Id">Fazer a Devolução</a> |
-                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">eliminar</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Requisitante.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FuncionarioInicioRequisicao.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FuncionarioFimRequisicao.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Multa)
+                </td>
+                <td>
+                    <a asp-action="Revoke" asp-route-id="@item.Id">Devolução</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                </td>
+            </tr>
             }
         </tbody>
 </div>

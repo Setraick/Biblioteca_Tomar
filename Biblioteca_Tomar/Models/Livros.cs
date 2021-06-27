@@ -30,7 +30,8 @@ namespace Biblioteca_Tomar.Models
         /// <summary>
         /// FK para a Categoria do livro
         /// </summary>
-        [ForeignKey("Categoria")] 
+        [ForeignKey("Categoria")]
+        [Display(Name = "Categorias")]
         public int CategoriaFK { get; set; }   // atributo para ser usado no SGBD e no C#. Representa a FK para a Raça do cão
         public Categorias Categoria { get; set; }   // atributo para ser usado no C#. Representa a FK para a Raça do cão
 
@@ -51,6 +52,7 @@ namespace Biblioteca_Tomar.Models
         /// <summary>
         /// A foto da capa
         /// </summary>
+        [Display(Name = "Foto da capa")]
         public String FotoCapa { get; set; }
 
         public ICollection<ReqLivros> ListaRequisicoes { get; set; }

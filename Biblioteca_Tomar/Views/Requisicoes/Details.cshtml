@@ -4,10 +4,10 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detalhes</h1>
 
 <div>
-    <h4>Requisicoes</h4>
+    <h4>Requisições</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -55,7 +55,7 @@
         </dd>
     </dl>
 </div>
-<div>
+@*<div>
     <table class="table">
         <thead>
             <tr>
@@ -70,7 +70,7 @@
         </thead>
         <tbody>
             @foreach (var Livros in Model.ListaLivros)
-            { // listar todas as faixas Associadas aos albuns que está em exibição
+            { // listar todos os Livros Associadas aos albuns que está em exibição
                 <tr>
                     <a asp-controller="Livros" asp-action="Details" asp-route-id="@Livros.Livro.Id">
                         @Livros.Livro.Titulo
@@ -79,8 +79,9 @@
             }
         </tbody>
     </table>
-</div>
+</div>*@
 <div>
+    <a asp-area="" asp-controller="ReqLivros" asp-action="Create" />Adicionar Livro</a>|
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar</a>
 </div>

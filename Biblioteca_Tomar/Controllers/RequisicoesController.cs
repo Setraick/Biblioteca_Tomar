@@ -14,8 +14,14 @@ namespace Biblioteca_Tomar.Controllers
     //[Authorize]
     public class RequisicoesController : Controller
     {
+        /// <summary>
+        /// referência à base de dados
+        /// </summary>
         private readonly ApplicationDbContext _context;
 
+        /// <summary>
+        /// objeto que sabe interagir com os dados do utilizador que se autêntica
+        /// </summary>
         public RequisicoesController(ApplicationDbContext context)
         {
             _context = context;
@@ -55,7 +61,6 @@ namespace Biblioteca_Tomar.Controllers
             var listaUtilizadores = _context.Utilizadores.OrderBy(u => u.Nome);
 
             ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Nome");
-            //ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(_context.Utilizadores, "Id", "Email");
             ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores, "Id", "Nome");
             return View();
         }
@@ -98,9 +103,10 @@ namespace Biblioteca_Tomar.Controllers
         // GET: Requisicoes/Revoke
         public IActionResult Revoke()
         {
-            //ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(_context.Utilizadores, "Id", "Email");
-            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(_context.Utilizadores, "Id", "Email");
-            //ViewData["RequisitanteFK"] = new SelectList(_context.Utilizadores.OrderBy(c => c.Nome), "Id", "Nome");
+            var listaUtilizadores = _context.Utilizadores.OrderBy(u => u.Nome);
+            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Nome");
+            ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores, "Id", "Nome");
+            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email");
             return View();
         }
 
@@ -109,34 +115,37 @@ namespace Biblioteca_Tomar.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Revoke([Bind("Id,RequisitanteFK,FuncionarioInicioRequisicaoFK,FuncionarioFimRequisicaoFK,Data,DataDevol,Multa")] Requisicoes requisicao)
+        public async Task<IActionResult> Revoke(int id, [Bind("Id,RequisitanteFK,FuncionarioInicioRequisicaoFK,FuncionarioFimRequisicaoFK,Data,DataDevol,Multa")] Requisicoes requisicoes)
         {
-            if (requisicao.FuncionarioFimRequisicaoFK > 0)
+            if (id != requisicoes.Id)
             {
-                if (ModelState.IsValid)
-                {
-                    try
-                    {
-                        _context.Add(requisicao);
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
-                    }
-                    catch (Exception ex)
-                    {
-                        ModelState.AddModelError("", "Ocorreu um erro...");
+                return NotFound();
+            }
 
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(requisicoes);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!RequisicoesExists(requisicoes.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
                     }
                 }
+                return RedirectToAction(nameof(Index));
             }
-            else
-            {
-                // não foi escolhido um requisitante válido 
-                ModelState.AddModelError("", "Não se esqueça de escolher o requisitante...");
-            }
-
-            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(_context.Utilizadores.OrderBy(u => u.Nome), "Id", "Nome", requisicao.FuncionarioFimRequisicaoFK);
-
-            return View(requisicao);
+            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(_context.Utilizadores, "Id", "Email", requisicoes.FuncionarioInicioRequisicaoFK);
+            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(_context.Utilizadores, "Id", "Email", requisicoes.FuncionarioFimRequisicaoFK);
+            ViewData["RequisitanteFK"] = new SelectList(_context.Utilizadores, "Id", "Email", requisicoes.RequisitanteFK);
+            return View(requisicoes);
         }
 
         // GET: Requisicoes/Edit/5

@@ -4,9 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
-<h4>Requisicoes</h4>
+<h4>Requisições</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,17 +15,17 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="RequisitanteFK" class="control-label"></label>
-                <select asp-for="RequisitanteFK" class="form-control" asp-items="ViewBag.RequesitanteFK"></select>
+                <select asp-for="RequisitanteFK" class="form-control" asp-items="ViewBag.RequisitanteFK"></select>
                 <span asp-validation-for="RequisitanteFK" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FuncionarioInicioRequisicaoFK" class="control-label"></label>
-                <select asp-for="FuncionarioInicioRequisicaoFK" class="form-control" asp-items="ViewBag.NFunEnt"></select>
+                <select asp-for="FuncionarioInicioRequisicaoFK" class="form-control" asp-items="ViewBag.FuncionarioInicioRequisicaoFK"></select>
                 <span asp-validation-for="FuncionarioInicioRequisicaoFK" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FuncionarioFimRequisicaoFK" class="control-label"></label>
-                <select asp-for="FuncionarioFimRequisicaoFK" class="form-control" asp-items="ViewBag.NFunSaida"></select>
+                <select asp-for="FuncionarioFimRequisicaoFK" class="form-control" asp-items="ViewBag.FuncionarioFimRequisicaoFK"></select>
                 <span asp-validation-for="FuncionarioFimRequisicaoFK" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -51,7 +51,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {

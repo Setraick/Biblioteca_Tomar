@@ -24,13 +24,15 @@ namespace Biblioteca_Tomar.Models
         /// A referencia ao requisitante
         /// </summary>
         [ForeignKey(nameof(Requisitante))]
+        [Display(Name = "Requisitante")]
         public int RequisitanteFK { get; set; }
         public Utilizadores Requisitante { get; set; }   // atributo para ser usado no C#. Representa a FK para o numero do Funcionário
 
         /// <summary>
         /// Referencia ao funcionario que entrega o livro
         /// </summary>
-        [ForeignKey(nameof(FuncionarioInicioRequisicao))]  
+        [ForeignKey(nameof(FuncionarioInicioRequisicao))]
+        [Display(Name = "Funcionário que criou a requisição")]
         public int FuncionarioInicioRequisicaoFK { get; set; }   // atributo para ser usado no SGBD e no C#. Representa a FK para o numero do Funcionário
         public Utilizadores FuncionarioInicioRequisicao { get; set; }   // atributo para ser usado no C#. Representa a FK para o numero do Funcionário
 
@@ -38,17 +40,22 @@ namespace Biblioteca_Tomar.Models
         /// Referencia ao funcionario que recebe o livro
         /// </summary>
         [ForeignKey(nameof(FuncionarioFimRequisicao))]
+        [Display(Name = "Funcionário que terminou a requisição")]
         public int? FuncionarioFimRequisicaoFK { get; set; } // atributo para ser usado no SGBD e no C#. Representa a FK para o numero do Funcionário
         public Utilizadores FuncionarioFimRequisicao { get; set; }   // atributo para ser usado no C#. Representa a FK para o numero do Funcionário
 
         /// <summary>
         /// Data da requesiçao dos livros
         /// </summary>
+        [Display(Name = "Data da requisição")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Data { get; set; }
 
         /// <summary>
         /// Data limite da devolução para não apanhar multa
         /// </summary>
+        [Display(Name = "Data da Devolução")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataDevol { get; set; }
 
         /// <summary>

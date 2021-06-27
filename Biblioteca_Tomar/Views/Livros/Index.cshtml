@@ -57,13 +57,13 @@
                     <td>
                         <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
 
-                        @if (User.Identity.IsAuthenticated)
-                        {
+                        @*@if (User.Identity.IsAuthenticated)
+                        {*@
                             <p>
                                 <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
                                 <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
                             </p>
-                        }
+                        @*}*@
                     </td>
                 </tr>
             }

@@ -18,6 +18,9 @@ namespace Biblioteca_Tomar.Controllers
     //[Authorize]
     public class LivrosController : Controller
     {
+        /// <summary>
+        /// referência à base de dados
+        /// </summary>
         private readonly ApplicationDbContext _context;
 
         /// <summary>
@@ -152,7 +155,7 @@ namespace Biblioteca_Tomar.Controllers
             {
                 try
                 {
-                    //adicionar dados do novo video
+                    //adicionar dados do novo Livro
                     _context.Add(livros);
                     //
                     await _context.SaveChangesAsync();

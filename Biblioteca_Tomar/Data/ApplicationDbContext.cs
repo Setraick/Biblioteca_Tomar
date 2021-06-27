@@ -31,6 +31,13 @@ namespace Biblioteca_Tomar.Data
 
             // insert DB seed
 
+            // dados para definição dos roles
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Id = "a", Name = "Admninistrador", NormalizedName = "ADMINISTRADOR" },
+                new IdentityRole { Id = "u", Name = "Utilizador", NormalizedName = "UTILIZADOR" }
+                );
+
+            ///dados para testes durante o desenvolvimento
             modelBuilder.Entity<Categorias>().HasData(
                new Categorias { Id = 1, Designacao = "Ação" },
                new Categorias { Id = 2, Designacao = "Autobiografia" },
