@@ -36,7 +36,12 @@ namespace Biblioteca_Tomar.Models
         [Required(ErrorMessage = "O Email de preenchimento obrigatório")]
         [StringLength(50, ErrorMessage = "O {0} não pode ter mais de {1} caracteres.")]
         [EmailAddress(ErrorMessage = "o {0} introduzido não é válido")]
-        public string Email { get; set; } 
+        public string Email { get; set; }
 
+        // <summary>
+        /// Chave de ligação entre a Autenticação e os Utilizadores 
+        /// Consegue-se, por exemplo, filtrar os dados dos criadores qd se autenticam
+        /// </summary>
+        public string UserId { get; set; }
     }
 }

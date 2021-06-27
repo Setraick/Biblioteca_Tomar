@@ -101,13 +101,23 @@ namespace Biblioteca_Tomar.Controllers
         }
 
         // GET: Requisicoes/Revoke
-        public IActionResult Revoke()
+        public async Task<IActionResult> Revoke(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var requisicoes = await _context.Requisicoes.FindAsync(id);
+            if (requisicoes == null)
+            {
+                return NotFound();
+            }
             var listaUtilizadores = _context.Utilizadores.OrderBy(u => u.Nome);
-            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Nome");
-            ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores, "Id", "Nome");
-            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email");
-            return View();
+            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioInicioRequisicaoFK);
+            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioFimRequisicaoFK);
+            ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores.OrderBy(c => c.Nome), "Id", "Nome", requisicoes.RequisitanteFK);
+            return View(requisicoes);
         }
 
         // POST: Requisicoes/Revoke
@@ -142,9 +152,10 @@ namespace Biblioteca_Tomar.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(_context.Utilizadores, "Id", "Email", requisicoes.FuncionarioInicioRequisicaoFK);
-            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(_context.Utilizadores, "Id", "Email", requisicoes.FuncionarioFimRequisicaoFK);
-            ViewData["RequisitanteFK"] = new SelectList(_context.Utilizadores, "Id", "Email", requisicoes.RequisitanteFK);
+            var listaUtilizadores = _context.Utilizadores.OrderBy(u => u.Nome);
+            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioInicioRequisicaoFK);
+            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioFimRequisicaoFK);
+            ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores.OrderBy(c => c.Nome), "Id", "Nome", requisicoes.RequisitanteFK);
             return View(requisicoes);
         }
 
@@ -161,9 +172,10 @@ namespace Biblioteca_Tomar.Controllers
             {
                 return NotFound();
             }
-            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(_context.Utilizadores, "Id", "Email", requisicoes.FuncionarioInicioRequisicaoFK);
-            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(_context.Utilizadores, "Id", "Email", requisicoes.FuncionarioFimRequisicaoFK);
-            ViewData["RequisitanteFK"] = new SelectList(_context.Utilizadores.OrderBy(c => c.Nome), "Id", "Nome", requisicoes.RequisitanteFK);
+            var listaUtilizadores = _context.Utilizadores.OrderBy(u => u.Nome);
+            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioInicioRequisicaoFK);
+            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioFimRequisicaoFK);
+            ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores.OrderBy(c => c.Nome), "Id", "Nome", requisicoes.RequisitanteFK);
             return View(requisicoes);
         }
 
@@ -199,9 +211,10 @@ namespace Biblioteca_Tomar.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(_context.Utilizadores, "Id", "Email", requisicoes.FuncionarioInicioRequisicaoFK);
-            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(_context.Utilizadores, "Id", "Email", requisicoes.FuncionarioFimRequisicaoFK);
-            ViewData["RequisitanteFK"] = new SelectList(_context.Utilizadores, "Id", "Email", requisicoes.RequisitanteFK);
+            var listaUtilizadores = _context.Utilizadores.OrderBy(u => u.Nome);
+            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioInicioRequisicaoFK);
+            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioFimRequisicaoFK);
+            ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores.OrderBy(c => c.Nome), "Id", "Nome", requisicoes.RequisitanteFK);
             return View(requisicoes);
         }
 

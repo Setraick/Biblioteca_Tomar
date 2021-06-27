@@ -4,14 +4,16 @@ using Biblioteca_Tomar.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Biblioteca_Tomar.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210627170200_UserId")]
+    partial class UserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -443,7 +445,7 @@ namespace Biblioteca_Tomar.Data.Migrations
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("UserNameId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -546,14 +548,14 @@ namespace Biblioteca_Tomar.Data.Migrations
                         new
                         {
                             Id = "a",
-                            ConcurrencyStamp = "fc8bcf3f-356e-4b56-9eb8-ff3e92ef56fd",
+                            ConcurrencyStamp = "7f2f767b-fd10-4244-8c4b-a4baf0f71825",
                             Name = "Admninistrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
                             Id = "u",
-                            ConcurrencyStamp = "d5461a67-f1df-459f-ba17-218a0d2d8edb",
+                            ConcurrencyStamp = "8080439a-381e-41ab-a413-cbb27633e0ed",
                             Name = "Utilizador",
                             NormalizedName = "UTILIZADOR"
                         });

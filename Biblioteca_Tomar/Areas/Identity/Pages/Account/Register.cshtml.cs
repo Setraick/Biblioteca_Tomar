@@ -158,7 +158,7 @@ namespace Biblioteca_Tomar.Areas.Identity.Pages.Account
                     Input.Utilizador.Email = Input.Email; // atribuir ao objeto 'Utilizador' o email fornecido pelo utilizador,
                                                           // a quando a escrita dos dados na interface
 
-                    Input.Utilizador.Nome = user.Id;
+                    Input.Utilizador.UserId = user.Id;
 
                     //estamos em condições de guardar os dados na BD
                     try
