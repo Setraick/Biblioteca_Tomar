@@ -82,8 +82,13 @@ namespace Biblioteca_Tomar.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(Roles = "")]
-        // GET: Utilizadores/Edit/5
+        [Authorize(Roles = "Admninistrador")]
+        /*
+         [Authorize(Roles = "Admninistrador")]  -->  só permite que pessoas com esta permissão entrem
+         [Authorize(Roles = "Admninistrador,Cliente")]  --> permite acesso a pessoas com uma das duas roles
+         [Authorize(Roles = "Admninistrador")]     -->
+         [Authorize(Roles = "Cliente")]    -->  Neste caso, a pessoa tem de pertencer aos dois roles
+        */        // GET: Utilizadores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             // quais os utilizadores ainda não autorizados a aceder ao sistema
