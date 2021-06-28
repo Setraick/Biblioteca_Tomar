@@ -55,31 +55,6 @@
         </dd>
     </dl>
 </div>
-@*<div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Livros
-                </th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var Livros in Model.ListaLivros)
-            { // listar todos os Livros Associadas aos albuns que está em exibição
-                <tr>
-                    <a asp-controller="Livros" asp-action="Details" asp-route-id="@Livros.Livro.Id">
-                        @Livros.Livro.Titulo
-                    </a>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>*@
 <div>
     <a asp-area="" asp-controller="ReqLivros" asp-action="Create" />Adicionar Livro</a>|
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |

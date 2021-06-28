@@ -34,31 +34,32 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Requisitante.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FuncionarioInicioRequisicao.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FuncionarioFimRequisicao.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Multa)
-                </td>
-                <td>
-                    <a asp-action="Revoke" asp-route-id="@item.Id">Devolução</a> |
-                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Requisitante.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FuncionarioInicioRequisicao.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FuncionarioFimRequisicao.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Multa)
+                    </td>
+                    <td>
+                        <a asp-action="Revoke" asp-route-id="@item.Id">Devolução</a> |
+                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                </tr>
             }
         </tbody>
+    </table>
+
 </div>
 
-    </table>

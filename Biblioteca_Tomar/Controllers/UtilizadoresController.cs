@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Biblioteca_Tomar.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class UtilizadoresController : Controller
     {
         /// <summary>
@@ -55,49 +55,28 @@ namespace Biblioteca_Tomar.Controllers
             return View(utilizadores);
         }
 
-        //// GET: Utilizadores/Create
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: Utilizadores/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to.
-        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,Nome,Telemovel,Email")] Utilizadores utilizadores)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(utilizadores);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(utilizadores);
-        //}
-
         /// <summary>
         /// Metodo para apresentar os dados dos Utilizadores a autorizar
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(Roles = "Admninistrador")]
+        //[Authorize(Roles = "Admninistrador")]
         /*
          [Authorize(Roles = "Admninistrador")]  -->  só permite que pessoas com esta permissão entrem
          [Authorize(Roles = "Admninistrador,Cliente")]  --> permite acesso a pessoas com uma das duas roles
          [Authorize(Roles = "Admninistrador")]     -->
          [Authorize(Roles = "Cliente")]    -->  Neste caso, a pessoa tem de pertencer aos dois roles
-        */        // GET: Utilizadores/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        */
+        public async Task<IActionResult> ListGivePermission()
         {
             // quais os utilizadores ainda não autorizados a aceder ao sistema
             // lista com os utilizadores bloqueados
             var listaDeUtilizadores = _userManager.Users.Where(u => u.LockoutEnd > DateTime.Now);
             // lista com os dados do Utilizador
             var listaUtil = _context.Utilizadores
-                .Where(ut => listaDeUtilizadores.Select(u => u.Id)
+                                    .Where(ut => listaDeUtilizadores.Select(u => u.Id)
                                                                   .Contains(ut.Nome));
+
             // Enviar os dados para a view
             return View(await listaUtil.ToListAsync());
         }
@@ -107,11 +86,8 @@ namespace Biblioteca_Tomar.Controllers
         /// </summary>
         /// <param name="utilizadores">lista desses utilizadores</param>
         /// <returns></returns>
-        // POST: Utilizadores/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<IActionResult> ListaUtilizadoresPorAutorizar(string[] utilizadores)
+        public async Task<IActionResult> ListGivePermission(string[] utilizadores)
         {
             // Será que algum utilizador foi selecionado?
             if (utilizadores.Count() != 0)
@@ -140,6 +116,19 @@ namespace Biblioteca_Tomar.Controllers
             }
 
             return RedirectToAction("Index");
+        }       
+        // GET: Utilizadores/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            // quais os utilizadores ainda não autorizados a aceder ao sistema
+            // lista com os utilizadores bloqueados
+            var listaDeUtilizadores = _userManager.Users.Where(u => u.LockoutEnd > DateTime.Now);
+            // lista com os dados do Utilizador
+            var listaUtil = _context.Utilizadores
+                .Where(ut => listaDeUtilizadores.Select(u => u.Id)
+                                                                  .Contains(ut.Nome));
+            // Enviar os dados para a view
+            return View(await listaUtil.ToListAsync());
         }
 
         // GET: Utilizadores/Delete/5

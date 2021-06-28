@@ -35,18 +35,7 @@ namespace Biblioteca_Tomar.Data
                 new IdentityRole { Id = "a", Name = "Admninistrador", NormalizedName = "ADMINISTRADOR" },
                 new IdentityRole { Id = "u", Name = "Utilizador", NormalizedName = "UTILIZADOR" }
                 );
-            modelBuilder.Entity<IdentityUser>().HasData(
-                new IdentityUser { Id = "3d934ae8-b06a-40af-9037-ab0c50f1ead0", UserName = "admin1@admin1.com", NormalizedUserName = "ADMIN1@ADMIN1.COM", Email = "admin1@admin1.com", NormalizedEmail = "ADMIN1@ADMIN1.COM", EmailConfirmed = true, PasswordHash = "AQAAAAEAACcQAAAAEH6eG5iK1a2UIjLUrA+orXpHMC5Syj0a0EGgnOF/F+mKLSesM9jFG6wpcV1DV0usKw==", SecurityStamp = "3QUQ7ASRHRCZTI5BJ7UDYWBFAI6LY55C", ConcurrencyStamp = "976c1385-bc6f-42c1-9735-92ce8711f807" },
-                new IdentityUser { Id = "9e2e24bf-9156-4caa-9f03-af7e1602d545", UserName = "utilizador@utilizador.com", NormalizedUserName = "UTILIZADOR@UTILIZADOR.COM", Email = "utilizador@utilizador.com", NormalizedEmail = "UTILIZADOR@UTILIZADOR.COM", EmailConfirmed = true, PasswordHash = "AQAAAAEAACcQAAAAEHEg7zCXQx/GezAiFnfJhQQtcOOdAWbAtslegNIpzENjJ6RtvTMWwwFcSBQyoDcXgw==", SecurityStamp = "Q7F6RPLAHL32WWX4DUI6JGCV5LLKX3XV", ConcurrencyStamp = "0b123ea8-0041-42a7-8a01-d739e6d7b358" }
-                );
-            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
-                new IdentityUserRole<string> { UserId = "3d934ae8-b06a-40af-9037-ab0c50f1ead0", RoleId = "a" },
-                new IdentityUserRole<string> { UserId = "9e2e24bf-9156-4caa-9f03-af7e1602d545", RoleId = "u" }
-                );
-            modelBuilder.Entity<IdentityUserClaim<string>>().HasData(
-                new IdentityUserClaim<string> { Id = 1, UserId = "3d934ae8-b06a-40af-9037-ab0c50f1ead0", ClaimType = "Nome", ClaimValue = "Administrador Administrador" },
-                new IdentityUserClaim<string> { Id = 2, UserId = "9e2e24bf-9156-4caa-9f03-af7e1602d545", ClaimType = "Nome", ClaimValue = "Utilizador Utilizador" }
-                );
+           
 
             // insert DB seed
 

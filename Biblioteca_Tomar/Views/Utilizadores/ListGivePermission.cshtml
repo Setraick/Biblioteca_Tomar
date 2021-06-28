@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Biblioteca_Tomar.Models.Utilizadores>
 
 @{
-    ViewData["Title"] = "Lista de Utilizadores por Autorizar";
+    ViewData["Title"] = "ListGivePermission";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -12,7 +12,7 @@
             <tr>
                 <th></th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Nome)
+                    UserId
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Email)
