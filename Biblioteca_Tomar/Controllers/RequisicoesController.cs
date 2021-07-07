@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Biblioteca_Tomar.Data;
 using Biblioteca_Tomar.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Biblioteca_Tomar.Controllers
 {
@@ -19,18 +20,25 @@ namespace Biblioteca_Tomar.Controllers
         /// </summary>
         private readonly ApplicationDbContext _context;
 
+        private readonly UserManager<ApplicationUser> _userManager;
+
         /// <summary>
         /// objeto que sabe interagir com os dados do utilizador que se autêntica
         /// </summary>
-        public RequisicoesController(ApplicationDbContext context)
+        public RequisicoesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+
 
         // GET: Requisicoes
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Requisicoes.Include(r => r.FuncionarioInicioRequisicao).Include(r => r.FuncionarioFimRequisicao).Include(r => r.Requisitante);
+            var applicationDbContext = _context.Requisicoes
+                .Include(r => r.FuncionarioInicioRequisicao)
+                .Include(r => r.FuncionarioFimRequisicao)
+                .Include(r => r.Requisitante);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -72,6 +80,10 @@ namespace Biblioteca_Tomar.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,RequisitanteFK,FuncionarioInicioRequisicaoFK,FuncionarioFimRequisicaoFK,Data,DataDevol,Multa")] Requisicoes requisicao)
         {
+            requisicao.Data = DateTime.Now;
+            requisicao.FuncionarioInicioRequisicaoFK = _context.Utilizadores.Where(u => u.UserId == _userManager.GetUserId(User)).FirstOrDefault().Id;
+            requisicao.FuncionarioFimRequisicaoFK = null;
+
             if (requisicao.RequisitanteFK > 0)
             {
                 if (ModelState.IsValid)
@@ -108,16 +120,28 @@ namespace Biblioteca_Tomar.Controllers
                 return NotFound();
             }
 
-            var requisicoes = await _context.Requisicoes.FindAsync(id);
-            if (requisicoes == null)
+            var requisicao = await _context.Requisicoes
+              .Include(r => r.FuncionarioInicioRequisicao)
+              .Include(r => r.Requisitante)
+              .Include(r => r.ListaLivros)
+              .ThenInclude(rl => rl.Livro)
+              .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (requisicao == null)
             {
                 return NotFound();
             }
-            var listaUtilizadores = _context.Utilizadores.OrderBy(u => u.Nome);
-            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioInicioRequisicaoFK);
-            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioFimRequisicaoFK);
-            ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores.OrderBy(c => c.Nome), "Id", "Nome", requisicoes.RequisitanteFK);
-            return View(requisicoes);
+
+            // avaliar se há multa
+            requisicao.Multa = 0;
+            int numDias = (DateTime.Now - requisicao.Data).Days;
+            if (numDias > 7)
+            {
+                requisicao.Multa = (numDias-7) * 0.25M;
+            }
+
+
+            return View(requisicao);
         }
 
         // POST: Requisicoes/Revoke
@@ -125,23 +149,41 @@ namespace Biblioteca_Tomar.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Revoke(int id, [Bind("Id,RequisitanteFK,FuncionarioInicioRequisicaoFK,FuncionarioFimRequisicaoFK,Data,DataDevol,Multa")] Requisicoes requisicoes)
+        public async Task<IActionResult> Revoke(int id, [Bind("Id,Multa")] Requisicoes requisicao)
         {
-            if (id != requisicoes.Id)
+            //var ID = requisicao.Id;
+            //requisicao.Data = _context.Requisicoes;
+            if (id != requisicao.Id)
             {
                 return NotFound();
             }
+
+            Requisicoes requisicaoAntiga = await _context.Requisicoes.AsNoTracking().Where(r=>r.Id==id).FirstOrDefaultAsync();
+            if (requisicaoAntiga == null)
+            {
+                return NotFound();
+            }
+
+            //Os dados que estão a vir da requisicaoAntiga não vão ser alterados com o revoke.
+            requisicao.RequisitanteFK = requisicaoAntiga.RequisitanteFK;
+            requisicao.FuncionarioInicioRequisicaoFK = requisicaoAntiga.FuncionarioInicioRequisicaoFK;
+            requisicao.FuncionarioFimRequisicaoFK = 1; // _context.Utilizadores.Where(u => u.UserId == _userManager.GetUserId(User)).FirstOrDefault().Id;
+            requisicao.Data = requisicaoAntiga.Data;
+
+            //A dataDevol é a data do revoke
+            requisicao.DataDevol = DateTime.Now;
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(requisicoes);
-                    await _context.SaveChangesAsync();
+                    _context.Update(requisicao);
+                    await _context.SaveChangesAsync(); 
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RequisicoesExists(requisicoes.Id))
+                    if (!RequisicoesExists(requisicao.Id))
                     {
                         return NotFound();
                     }
@@ -150,13 +192,10 @@ namespace Biblioteca_Tomar.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+              
             }
-            var listaUtilizadores = _context.Utilizadores.OrderBy(u => u.Nome);
-            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioInicioRequisicaoFK);
-            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioFimRequisicaoFK);
-            ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores.OrderBy(c => c.Nome), "Id", "Nome", requisicoes.RequisitanteFK);
-            return View(requisicoes);
+           
+            return RedirectToAction("Revoke", new { id = id });
         }
 
         // GET: Requisicoes/Edit/5
@@ -173,9 +212,9 @@ namespace Biblioteca_Tomar.Controllers
                 return NotFound();
             }
             var listaUtilizadores = _context.Utilizadores.OrderBy(u => u.Nome);
-            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioInicioRequisicaoFK);
-            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioFimRequisicaoFK);
-            ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores.OrderBy(c => c.Nome), "Id", "Nome", requisicoes.RequisitanteFK);
+            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Nome", requisicoes.FuncionarioInicioRequisicaoFK);
+            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Nome", requisicoes.FuncionarioFimRequisicaoFK);
+            ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores, "Id", "Nome", requisicoes.RequisitanteFK);
             return View(requisicoes);
         }
 
@@ -212,9 +251,9 @@ namespace Biblioteca_Tomar.Controllers
                 return RedirectToAction(nameof(Index));
             }
             var listaUtilizadores = _context.Utilizadores.OrderBy(u => u.Nome);
-            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioInicioRequisicaoFK);
-            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Email", requisicoes.FuncionarioFimRequisicaoFK);
-            ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores.OrderBy(c => c.Nome), "Id", "Nome", requisicoes.RequisitanteFK);
+            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Nome", requisicoes.FuncionarioInicioRequisicaoFK);
+            ViewData["FuncionarioFimRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Nome", requisicoes.FuncionarioFimRequisicaoFK);
+            ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores, "Id", "Nome", requisicoes.RequisitanteFK);
             return View(requisicoes);
         }
 
