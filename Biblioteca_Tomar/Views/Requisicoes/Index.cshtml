@@ -34,6 +34,7 @@
         <tbody>
             @foreach (var item in Model)
             {
+                var func = (item.DataDevol).ToString();
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Requisitante.Nome)
@@ -51,8 +52,12 @@
                         @Html.DisplayFor(modelItem => item.Multa)
                     </td>
                     <td>
-                        <a asp-action="Revoke" asp-route-id="@item.Id">Devolução</a> |
-                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                        @if (func == "01/01/0001 00:00:00")
+                        {
+                            <text>
+                                <a asp-action="Revoke" asp-route-id="@item.Id">Devolução</a> |
+                            </text>
+                        }
                         <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
                         <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
                     </td>

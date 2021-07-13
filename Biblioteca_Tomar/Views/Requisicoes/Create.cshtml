@@ -16,29 +16,41 @@
             <div class="form-group">
                 <label asp-for="RequisitanteFK" class="control-label"></label>
                 <select asp-for="RequisitanteFK" class="form-control" asp-items="ViewBag.RequisitanteFK">
-                    <option value="0">Escolha o Requesitante, por favor.</option>
+                    <option value="0">Escolha o Requisitante, por favor.</option>
                 </select>
-                @*<label asp-for="RequisitanteFK" class="control-label"></label>
-                <select asp-for="RequisitanteFK" class="form-control">
-                    @foreach (var key in ViewBag.Utilizadores.Nome)
-                    {
-                        <optgroup label="@key.Key">
-                            @foreach (var type in key.Value)
-                            {
-                                <option value="@type">@type</option>
-                            }
-                        </optgroup>
-                    }
-
-                </select>*@
                 <span asp-validation-for="RequisitanteFK" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FuncionarioInicioRequisicaoFK" class="control-label"></label>
-                <select asp-for="FuncionarioInicioRequisicaoFK" class="form-control" asp-items="ViewBag.FuncionarioInicioRequisicaoFK">
-                    <option value="0">Escolha o Funcionario, por favor.</option>
+                <label class="control-label">Livros</label>
+                <select name="livros" class="form-control" asp-items="ViewBag.LivroFK">
+                    <option value="0">Escolha o primeiro livro, por favor.</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label  class="control-label"></label>
+                <select name="livros" class="form-control" asp-items="ViewBag.LivroFK">
+                    <option value="0">Escolha o segundo livro, por favor.</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label"></label>
+                <select name="livros" class="form-control" asp-items="ViewBag.LivroFK">
+                    <option value="0">Escolha o terceiro livro, por favor.</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label"></label>
+                <select name="livros" class="form-control" asp-items="ViewBag.LivroFK">
+                    <option value="0">Escolha o quarto livro, por favor.</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label"></label>
+                <select name="livros" class="form-control" asp-items="ViewBag.LivroFK">
+                    <option value="0">Escolha o quinto livro, por favor.</option>
+                </select>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

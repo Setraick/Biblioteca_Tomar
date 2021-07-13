@@ -38,7 +38,8 @@ namespace Biblioteca_Tomar.Controllers
             var applicationDbContext = _context.Requisicoes
                 .Include(r => r.FuncionarioInicioRequisicao)
                 .Include(r => r.FuncionarioFimRequisicao)
-                .Include(r => r.Requisitante);
+                .Include(r => r.Requisitante)
+                .OrderByDescending(r => r.Data);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -54,6 +55,8 @@ namespace Biblioteca_Tomar.Controllers
                 .Include(r => r.FuncionarioInicioRequisicao)
                 .Include(r => r.FuncionarioFimRequisicao)
                 .Include(r => r.Requisitante)
+                .Include(r => r.ListaLivros)
+                .ThenInclude(rl => rl.Livro)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (requisicoes == null)
             {
@@ -66,10 +69,8 @@ namespace Biblioteca_Tomar.Controllers
         // GET: Requisicoes/Create
         public IActionResult Create()
         {
-            var listaUtilizadores = _context.Utilizadores.OrderBy(u => u.Nome);
-
-            ViewData["FuncionarioInicioRequisicaoFK"] = new SelectList(listaUtilizadores, "Id", "Nome");
-            ViewData["RequisitanteFK"] = new SelectList(listaUtilizadores, "Id", "Nome");
+            ViewData["RequisitanteFK"] = new SelectList(_context.Utilizadores.OrderBy(u => u.Nome), "Id", "Nome");
+            ViewData["LivroFK"] = new SelectList(_context.Livros, "Id", "Autor");
             return View();
         }
 
@@ -78,16 +79,49 @@ namespace Biblioteca_Tomar.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,RequisitanteFK,FuncionarioInicioRequisicaoFK,FuncionarioFimRequisicaoFK,Data,DataDevol,Multa")] Requisicoes requisicao)
+        public async Task<IActionResult> Create([Bind("RequisitanteFK")] Requisicoes requisicao, int[]livros)
         {
-            requisicao.Data = DateTime.Now;
-            requisicao.FuncionarioInicioRequisicaoFK = _context.Utilizadores.Where(u => u.UserId == _userManager.GetUserId(User)).FirstOrDefault().Id;
-            requisicao.FuncionarioFimRequisicaoFK = null;
-
             if (requisicao.RequisitanteFK > 0)
             {
+                requisicao.Data = DateTime.Now;
+                requisicao.FuncionarioInicioRequisicaoFK = _context.Utilizadores.Where(u => u.UserId == _userManager.GetUserId(User)).FirstOrDefault().Id;
+                requisicao.FuncionarioFimRequisicaoFK = null;
+                // Procurar os livros
+                var listaLivros = new List<ReqLivros>();
+                foreach (int idLivro in livros)
+                {
+                    if (idLivro != 0) {
+                        var livro = await _context.Livros.FirstOrDefaultAsync(l => l.Id == idLivro);
+                        if (livro != null)
+                        {
+                            ReqLivros rl = new()
+                            {
+                                Req = requisicao,
+                                Livro = livro
+                            };
+                            // Temos de garantir que o livro da linha 95 ainda não existe na listaLivros
+                            if (!(listaLivros.Contains(rl)))
+                            {
+                                listaLivros.Add(rl);
+                            }
+                        }
+                    }
+                }
+                // Confirmar que foi selecionado pelo menos livro
+                if(listaLivros.Count == 0)
+                {
+                    ModelState.AddModelError("", "Tem que selecionar pelo menos um livro");
+                    ViewData["RequisitanteFK"] = new SelectList(_context.Utilizadores.OrderBy(u => u.Nome), "Id", "Nome");
+                    ViewData["LivroFK"] = new SelectList(_context.Livros, "Id", "Autor");
+                    return View(requisicao);
+                }
+
+                // Adicionar os livros requisitados à requisição
+                requisicao.ListaLivros = listaLivros;
+
                 if (ModelState.IsValid)
                 {
+
                     try
                     {
                         _context.Add(requisicao);

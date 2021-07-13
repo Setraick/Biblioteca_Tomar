@@ -19,15 +19,15 @@
                 @Html.DisplayFor(model => model.Requisitante.Nome)
             </div>
             <div class="form-group">
-                <label class="control-label">Funcionário entregou livro</label>
+                <label class="control-label">Funcionário que entregou o(s) livro(s) </label>
                 @Html.DisplayFor(model => model.FuncionarioInicioRequisicao.Nome)
             </div>
             <div class="form-group">
                 <label class="control-label">Livro(s)</label>
                 @foreach (var reqLivro in Model.ListaLivros)
                 {<text>
-                        @reqLivro.Livro.Titulo
                         <br />
+                        @reqLivro.Livro.Titulo
                 </text>
             }
             </div>
