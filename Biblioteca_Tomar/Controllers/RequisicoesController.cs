@@ -88,21 +88,24 @@ namespace Biblioteca_Tomar.Controllers
                 requisicao.FuncionarioFimRequisicaoFK = null;
                 // Procurar os livros
                 var listaLivros = new List<ReqLivros>();
+                Array.Sort(livros);
+                int lastLivro = 0;
                 foreach (int idLivro in livros)
                 {
                     if (idLivro != 0) {
-                        var livro = await _context.Livros.FirstOrDefaultAsync(l => l.Id == idLivro);
-                        if (livro != null)
+                        if (lastLivro != idLivro)
                         {
-                            ReqLivros rl = new()
+                            var livro = await _context.Livros.FirstOrDefaultAsync(l => l.Id == idLivro);
+                            if (livro != null)
                             {
-                                Req = requisicao,
-                                Livro = livro
-                            };
-                            // Temos de garantir que o livro da linha 95 ainda não existe na listaLivros
-                            if (!(listaLivros.Contains(rl)))
-                            {
-                                listaLivros.Add(rl);
+                                ReqLivros rl = new()
+                                {
+                                    Req = requisicao,
+                                    Livro = livro
+                                };
+                                // Temos de garantir que o livro da linha 95 ainda não existe na listaLivros
+                                    listaLivros.Add(rl);
+                                lastLivro = idLivro;
                             }
                         }
                     }

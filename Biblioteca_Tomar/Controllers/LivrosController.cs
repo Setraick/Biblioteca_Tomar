@@ -45,30 +45,6 @@ namespace Biblioteca_Tomar.Controllers
         // GET: Livros
         public async Task<IActionResult> Index()
         {
-            //var listaFotosCaes = await _context.Fotografias.Include(f => f.Cao)
-            //                                      .OrderByDescending(f => f.DataFoto)  // LINQ
-            //                                      .ToListAsync();
-            //// var. auxiliar
-            //string username = _userManager.GetUserId(User);
-
-            //// quais o(s) cão/cães da pessoa q se autenticou?
-            //var listaCaes = await (from c in _context.Caes
-            //                       join cc in _context.CriadoresCaes on c.Id equals cc.CaoFK
-            //                       join cr in _context.Criadores on cc.CriadorFK equals cr.Id
-            //                       where cr.UserNameId == username
-            //                       select c.Id)
-            //                      .ToListAsync();
-
-            //// é uma opção, mas não a vamos usar...
-            //// ViewBag.caes = listaCaes;
-
-            //// vamos usar um 'ViewModel'
-            //// para o transporte
-            //var listaFotos = new ListarFotosViewModel
-            //{
-            //    ListaFotos = listaFotosCaes,
-            //    ListaCaes = listaCaes
-            //};
             var fotos = _context.Livros.Include(v => v.FotoCapa);
             var applicationDbContext = _context.Livros.Include(l => l.Categoria);
             return View(await applicationDbContext.ToListAsync());
@@ -85,7 +61,6 @@ namespace Biblioteca_Tomar.Controllers
 
             var livros = await _context.Livros
                 .Include(l => l.Categoria)
-                //.ThenInclude(uv => uv.Id.LivroFK == _userManager.GetUserId(User))
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (livros == null)
             {
