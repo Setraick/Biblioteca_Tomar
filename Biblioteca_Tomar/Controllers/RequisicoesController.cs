@@ -145,7 +145,7 @@ namespace Biblioteca_Tomar.Controllers
             }
 
             ViewData["RequisitanteFK"] = new SelectList(_context.Utilizadores.OrderBy(u => u.Nome), "Id", "Nome", requisicao.RequisitanteFK);
-
+            ViewData["LivroFK"] = new SelectList(_context.Livros, "Id", "Autor");
             return View(requisicao);
         }
 

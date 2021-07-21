@@ -92,6 +92,7 @@ namespace Biblioteca_Tomar.Controllers
                 //não ha ficheiro
                 ModelState.AddModelError("", "Adicione por favor a capa do Livro");
                 ViewData["Id"] = new SelectList(_context.Livros.OrderBy(v => v.Titulo), "Id", "Titulo", livros.Id);
+                ViewData["CategoriaFK"] = new SelectList(_context.Categorias, "Id", "Designacao");
                 return View(livros);
             }
             else
@@ -121,6 +122,7 @@ namespace Biblioteca_Tomar.Controllers
                 {
                     //ficheiro não valido
                     ModelState.AddModelError("", "Apenas pode associar uma imagem a um livro.");
+                    ViewData["CategoriaFK"] = new SelectList(_context.Categorias, "Id", "Designacao");
                     return View(livros);
 
                 }
